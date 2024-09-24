@@ -79,11 +79,17 @@ section.visible {
 }
 
 /* 프로필 사진 스타일링 */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .profile-photo {
-    display: block;
-    margin: 0 auto;
     border-radius: 50%;
     width: 150px;
     height: 150px;
     object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
