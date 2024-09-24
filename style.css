@@ -77,3 +77,13 @@ section.visible {
 .project {
     margin-bottom: 1.5rem;
 }
+
+/* 프로필 사진 스타일링 */
+.profile-photo {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
