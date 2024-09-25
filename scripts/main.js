@@ -248,11 +248,12 @@ document.addEventListener('DOMContentLoaded', function() {
         </ul>
     `;
 
-  // 프로젝트 상세 정보 모달 기능
+// 프로젝트 상세 정보 모달 기능
 const projectDetailsBtn = document.querySelector('.project-details-btn');
 const projectDetailsModal = document.querySelector('.project-details-modal');
 const closeBtn = document.querySelector('.close-btn');
 const projectDetailsContent = document.querySelector('.project-details-content');
+const modalContent = projectDetailsModal.querySelector('.modal-content');
 
 function openModal() {
     projectDetailsModal.style.display = 'flex';
@@ -260,7 +261,6 @@ function openModal() {
     document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
     
     // 모달 창 크기 조정
-    const modalContent = projectDetailsModal.querySelector('.modal-content');
     modalContent.style.maxHeight = '90vh';
     modalContent.style.overflowY = 'auto';
     
@@ -280,14 +280,19 @@ projectDetailsBtn.addEventListener('click', function(e) {
 
 closeBtn.addEventListener('click', closeModal);
 
-projectDetailsModal.addEventListener('click', function(event) {
-    if (event.target === projectDetailsModal) {
+// 모달 외부 클릭 시 닫기 (모바일 터치 포함)
+projectDetailsModal.addEventListener('click', closeModal);
+projectDetailsModal.addEventListener('touchstart', function(e) {
+    if (e.target === projectDetailsModal) {
         closeModal();
     }
 });
 
 // 모달 내부 클릭 시 이벤트 전파 중지
-projectDetailsModal.querySelector('.modal-content').addEventListener('click', function(e) {
+modalContent.addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+modalContent.addEventListener('touchstart', function(e) {
     e.stopPropagation();
 });
 
