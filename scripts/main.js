@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Swiper 초기화
-    new Swiper('.swiper-container', {
+    const swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
-        grabCursor: true,
+        grabCursor: false,
         centeredSlides: true,
         slidesPerView: 'auto',
         coverflowEffect: {
@@ -40,11 +40,24 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         pagination: {
             el: '.swiper-pagination',
+            clickable: true,
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-        }
+        },
+        touchRatio: 0,
+        keyboard: {
+            enabled: false,
+        },
+        mousewheel: {
+            invert: false,
+        },
+        on: {
+            touchStart: function (e) {
+                e.preventDefault(); // 터치 이벤트 기본 동작 방지
+            },
+        },
     });
 
     // 타이핑 효과 (한국어로 변경)
