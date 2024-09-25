@@ -56,29 +56,52 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function showContent(contentType) {
+        console.log('showContent called with:', contentType);
         try {
             Object.keys(educationData).forEach(key => {
                 const content = document.getElementById(`${key}Content`);
-                content.style.display = key === contentType ? 'block' : 'none';
-                if (key === contentType) content.innerHTML = educationData[key];
+                if (content) {
+                    // contentType을 소문자로 변환하여 비교
+                    content.style.display = key.toLowerCase() === contentType.toLowerCase() ? 'block' : 'none';
+                    if (key.toLowerCase() === contentType.toLowerCase()) {
+                        content.innerHTML = educationData[key];
+                        console.log(`Content set for ${key}`);
+                    }
+                } else {
+                    console.error(`Element not found: ${key}Content`);
+                }
             });
-            document.querySelector('.guidance-message').style.display = 'none';
+            const guidanceMessage = document.querySelector('.guidance-message');
+            if (guidanceMessage) {
+                guidanceMessage.style.display = 'none';
+            }
         } catch (error) {
-            console.error('Error in function:', error);
+            console.error('Error in showContent function:', error);
         }
     }
 
-    ['Education', 'Certifications', 'MilitaryService'].forEach(type => {
-        document.getElementById(`show${type}`).addEventListener('click', () => showContent(type.toLowerCase()));
+    const buttons = ['Education', 'Certifications', 'MilitaryService'];
+    buttons.forEach(type => {
+        const button = document.getElementById(`show${type}`);
+        if (button) {
+            button.addEventListener('click', () => {
+                console.log(`${type} button clicked`);
+                // type을 그대로 전달
+                showContent(type);
+            });
+        } else {
+            console.error(`Button not found: show${type}`);
+        }
     });
 
-    // Swiper 초기화 수정
+    // Swiper 초기화
     if (typeof Swiper !== 'undefined') {
         new Swiper('.swiper-container', {
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
+            initialSlide: 1,
             coverflowEffect: {
                 rotate: 50,
                 stretch: 0,
