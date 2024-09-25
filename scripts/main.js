@@ -56,12 +56,16 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function showContent(contentType) {
-        Object.keys(educationData).forEach(key => {
-            const content = document.getElementById(`${key}Content`);
-            content.style.display = key === contentType ? 'block' : 'none';
-            if (key === contentType) content.innerHTML = educationData[key];
-        });
-        document.querySelector('.guidance-message').style.display = 'none';
+        try {
+            Object.keys(educationData).forEach(key => {
+                const content = document.getElementById(`${key}Content`);
+                content.style.display = key === contentType ? 'block' : 'none';
+                if (key === contentType) content.innerHTML = educationData[key];
+            });
+            document.querySelector('.guidance-message').style.display = 'none';
+        } catch (error) {
+            console.error('Error in function:', error);
+        }
     }
 
     ['Education', 'Certifications', 'MilitaryService'].forEach(type => {
@@ -69,20 +73,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Swiper 초기화
-    new Swiper('.swiper-container', {
-        effect: 'slide',
-        grabCursor: true,
-        centeredSlides: false,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        mousewheel: { invert: false, forceToAxis: true },
-        keyboard: { enabled: true },
-    });
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.swiper-container', {
+            effect: 'slide',
+            grabCursor: true,
+            centeredSlides: false,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            mousewheel: { invert: false, forceToAxis: true },
+            keyboard: { enabled: true },
+        });
+    } else {
+        console.error('Swiper is not loaded');
+    }
 
     // 타이핑 효과 (GSAP 사용)
     const typingText = document.querySelector("#typing-text");
@@ -95,26 +103,34 @@ document.addEventListener('DOMContentLoaded', function() {
         "아래 Contact Information에서<br>연락처를 확인해 주세요!"
     ];
 
-    gsap.registerPlugin(TextPlugin);
+    if (typeof gsap !== 'undefined' && typeof gsap.registerPlugin === 'function') {
+        gsap.registerPlugin(TextPlugin);
+    } else {
+        console.error('GSAP or TextPlugin is not loaded');
+    }
 
     function animateText(index) {
-        gsap.to(typingText, {
-            duration: 2,
-            text: { value: textArray[index], delimiter: "" },
-            ease: "none",
-            onComplete: () => {
-                gsap.to(typingText, {
-                    duration: 1,
-                    opacity: 0,
-                    ease: "power2.in",
-                    onComplete: () => {
-                        typingText.innerHTML = "";
-                        gsap.set(typingText, {opacity: 1});
-                        animateText((index + 1) % textArray.length);
-                    }
-                });
-            }
-        });
+        try {
+            gsap.to(typingText, {
+                duration: 2,
+                text: { value: textArray[index], delimiter: "" },
+                ease: "none",
+                onComplete: () => {
+                    gsap.to(typingText, {
+                        duration: 1,
+                        opacity: 0,
+                        ease: "power2.in",
+                        onComplete: () => {
+                            typingText.innerHTML = "";
+                            gsap.set(typingText, {opacity: 1});
+                            animateText((index + 1) % textArray.length);
+                        }
+                    });
+                }
+            });
+        } catch (error) {
+            console.error('Error in function:', error);
+        }
     }
 
     animateText(0);
@@ -195,25 +211,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalContent = projectDetailsModal.querySelector('.modal-content');
 
     function openModal(projectKey) {
-        const details = projectDetails[projectKey];
-        if (details) {
-            modalContent.innerHTML = `
-                <span class="close-btn">&times;</span>
-                <h3>${details.title}</h3>
-                <p>${details.description}</p>
-                <h4>주요 기능:</h4>
-                <ul>${details.features.map(feature => `<li>${feature}</li>`).join('')}</ul>
-                <h4>사용된 기술:</h4>
-                <ul>${details.technologies.map(tech => `<li>${tech}</li>`).join('')}</ul>
-            `;
-            projectDetailsModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        try {
+            const details = projectDetails[projectKey];
+            if (details) {
+                modalContent.innerHTML = `
+                    <span class="close-btn">&times;</span>
+                    <h3>${details.title}</h3>
+                    <p>${details.description}</p>
+                    <h4>주요 기능:</h4>
+                    <ul>${details.features.map(feature => `<li>${feature}</li>`).join('')}</ul>
+                    <h4>사용된 기술:</h4>
+                    <ul>${details.technologies.map(tech => `<li>${tech}</li>`).join('')}</ul>
+                `;
+                projectDetailsModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        } catch (error) {
+            console.error('Error in function:', error);
         }
     }
 
     function closeModal() {
-        projectDetailsModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        try {
+            projectDetailsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } catch (error) {
+            console.error('Error in function:', error);
+        }
     }
 
     document.querySelectorAll('.project-details-btn').forEach(button => {
@@ -251,5 +275,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', () => {
         scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+    });
+
+    function initializeFeatures() {
+        if (typeof Swiper !== 'undefined') {
+            // Swiper 초기화
+        }
+        if (typeof gsap !== 'undefined') {
+            // GSAP 관련 기능 초기화
+        }
+        // 기타 기능 초기화
+    }
+
+    // 페이지 로드 후 일정 시간 뒤에 기능 초기화
+    window.addEventListener('load', function() {
+        setTimeout(initializeFeatures, 1000);
     });
 });
