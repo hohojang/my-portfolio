@@ -60,18 +60,17 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
-    // 타이핑 효과 (한국어로 변경)
+    // 타이핑 효과 (한국어)
     new Typed('#typing-text', {
         strings: [
             "안녕하세요! 박장호입니다.",
-            "저는 매일 매일 성장하는 개발자입니다.",
-            "저의 가능성을 알아봐주시고 함께 발전해나가는 회사를 찾고 있습니다!",
-            "저에게 연락하시는 방법은 아래 Contact Information을 확인해주세요!"
-            
+            "저는 매일 성장하는<br>개발자입니다.",
+            "개발에 매료되어<br>매일 노력하고 있습니다!"
         ],
-        typeSpeed: 45,
+        typeSpeed: 50,
         backSpeed: 30,
         backDelay: 1000,
-        loop: true
+        loop: true,
+        contentType: 'html', // HTML 태그 사용 허용
     });
 });
