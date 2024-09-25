@@ -411,3 +411,129 @@ html {
     display: flex;
     align-items: center;
 }
+
+/* 반응형 디자인 개선 */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 0.3rem 0;
+    }
+
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    #about {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    #typing-text {
+        font-size: 1.2rem;
+        min-height: 3.6rem;
+    }
+
+    .education-container button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    .content-box {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .skill {
+        width: 130px;
+        padding: 0.8rem;
+    }
+
+    .skill i {
+        font-size: 2rem;
+    }
+
+    .skill p {
+        font-size: 0.8rem;
+    }
+
+    .skill-bar {
+        height: 6px;
+    }
+
+    .skill-level {
+        font-size: 0.7rem;
+    }
+
+    .swiper-container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .swiper-slide {
+        width: 250px;
+        height: 250px;
+    }
+
+    .project h3 {
+        font-size: 1.2rem;
+    }
+
+    .project p {
+        font-size: 0.9rem;
+    }
+
+    #contact p {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .github-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    .skills-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .skill {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .swiper-slide {
+        width: 200px;
+        height: 200px;
+    }
+}
