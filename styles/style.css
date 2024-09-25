@@ -4,6 +4,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
 header {
@@ -131,6 +132,7 @@ html {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
+    overflow: visible; /* Swiper 컨테이너의 오버플로우를 visible로 설정 */
 }
 
 .swiper-slide {
@@ -204,6 +206,10 @@ html {
     .profile-photo {
         width: 100px;
         height: 100px;
+    }
+
+    .swiper-container {
+        touch-action: pan-y; /* 세로 스크롤만 허용 */
     }
 }
 
