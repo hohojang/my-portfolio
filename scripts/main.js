@@ -73,4 +73,60 @@ document.addEventListener('DOMContentLoaded', function() {
         loop: true,
         contentType: 'html', // HTML 태그 사용 허용
     });
+
+    // Education & Certifications 섹션
+    const showEducationBtn = document.getElementById('showEducation');
+    const showCertificationsBtn = document.getElementById('showCertifications');
+    const educationContent = document.getElementById('educationContent');
+    const certificationsContent = document.getElementById('certificationsContent');
+
+    showEducationBtn.addEventListener('click', function() {
+        educationContent.style.display = 'block';
+        educationContent.innerHTML = `
+            <h3>Education</h3>
+            <ul>
+                <li>Bachelor's Degree in Computer Science, XYZ University (2018-2022)</li>
+                <li>High School Diploma, ABC High School (2015-2018)</li>
+            </ul>
+        `;
+        certificationsContent.style.display = 'none';
+    });
+
+    showCertificationsBtn.addEventListener('click', function() {
+        certificationsContent.style.display = 'block';
+        certificationsContent.innerHTML = `
+            <h3>Certifications</h3>
+            <ul>
+                <li>AWS Certified Developer - Associate (2023)</li>
+                <li>Microsoft Certified: Azure Fundamentals (2022)</li>
+                <li>CompTIA A+ (2021)</li>
+            </ul>
+        `;
+        educationContent.style.display = 'none';
+    });
+
+    // Skills 숙련도 애니메이션
+    const skills = document.querySelectorAll('.skill');
+    const skillLevels = {
+        'HTML': 90,
+        'CSS': 85,
+        'JavaScript': 80,
+        'Python': 75,
+        'C#': 70,
+        'Arduino': 65
+    };
+
+    skills.forEach(skill => {
+        const skillName = skill.querySelector('p').textContent;
+        const skillBar = document.createElement('div');
+        skillBar.className = 'skill-bar';
+        const skillProgress = document.createElement('div');
+        skillProgress.className = 'skill-progress';
+        skillBar.appendChild(skillProgress);
+        skill.appendChild(skillBar);
+
+        setTimeout(() => {
+            skillProgress.style.width = `${skillLevels[skillName]}%`;
+        }, 500);
+    });
 });
