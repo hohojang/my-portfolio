@@ -96,32 +96,18 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         pagination: {
             el: '.swiper-pagination',
-            clickable: true,
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        keyboard: {
-            enabled: true,
-        },
+        slideToClickedSlide: true,
+        loop: true,
+        loopAdditionalSlides: 3,
+        // 마우스 휠 컨트롤 추가
         mousewheel: {
             invert: false,
         },
-        breakpoints: {
-            320: {
-                slidesPerView: 1,
-                spaceBetween: 20
-            },
-            480: {
-                slidesPerView: 2,
-                spaceBetween: 30
-            },
-            640: {
-                slidesPerView: 3,
-                spaceBetween: 40
-            }
-        }
     });
 
     // 타이핑 효과 (한국어)
