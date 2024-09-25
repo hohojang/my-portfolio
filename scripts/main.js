@@ -145,12 +145,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Skills 숙련도 애니메이션
     const skillsContainer = document.querySelector('.skills-container');
     const skillLevels = {
-        'HTML5': 90,
-        'CSS3': 85,
+        'Python': 90,
+        'HTML5': 80,
+        'CSS3': 80,
         'JavaScript': 80,
-        'Python': 75,
         'CSharp': 70,
-        'Arduino': 65
+        'Arduino': 80
     };
 
     // 숙련도 순으로 정렬
@@ -210,4 +210,73 @@ document.addEventListener('DOMContentLoaded', function() {
             skillProgress.style.width = `${level}%`;
         }, 500);
     });
+
+    // 프로젝트 상세 정보
+    const projectDetails = `
+        <h4>사용 기술:</h4>
+        <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+        </ul>
+        <h4>주요 기능:</h4>
+        <ul>
+            <li>반응형 디자인</li>
+            <li>동적 타이핑 효과 (Typed.js)</li>
+            <li>스킬 레벨 애니메이션</li>
+            <li>섹션별 페이드인 효과</li>
+        </ul>
+        <h4>성과:</h4>
+        <ul>
+            <li>모바일 및 데스크톱에서 반응형 디자인 구현</li>
+            <li>GitHub Pages를 활용한 웹사이트 배포</li>
+        </ul>
+        <h4>문제 해결:</h4>
+        <ul>
+            <li>반응형 디자인 구현:
+                <ul>
+                    <li>문제: 다양한 화면 크기에서 레이아웃 깨짐 현상 발생</li>
+                    <li>해결: CSS 미디어 쿼리를 활용하여 화면 크기별 스타일 조정</li>
+                </ul>
+            </li>
+            <li>GitHub Pages 배포:
+                <ul>
+                    <li>문제: 로컬에서는 정상 작동하지만 GitHub Pages에 배포 시 경로 문제 발생</li>
+                    <li>해결: 상대 경로를 사용하여 리소스 링크를 수정하여 해결</li>
+                </ul>
+            </li>
+        </ul>
+    `;
+
+// 프로젝트 상세 정보 모달 기능
+const projectDetailsBtn = document.querySelector('.project-details-btn');
+const projectDetailsModal = document.querySelector('.project-details-modal');
+const closeBtn = document.querySelector('.close-btn');
+const projectDetailsContent = document.querySelector('.project-details-content');
+
+projectDetailsBtn.addEventListener('click', function() {
+    projectDetailsModal.style.display = 'flex';
+    projectDetailsContent.innerHTML = projectDetails;
+    document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+    
+    // 모달 창 크기 조정
+    const modalContent = projectDetailsModal.querySelector('.modal-content');
+    modalContent.style.maxHeight = '90vh';
+    modalContent.style.overflowY = 'auto';
+    
+    // 스크롤을 맨 위로 이동
+    modalContent.scrollTop = 0;
+});
+
+closeBtn.addEventListener('click', function() {
+    projectDetailsModal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+});
+
+projectDetailsModal.addEventListener('click', function(event) {
+    if (event.target === projectDetailsModal) {
+        projectDetailsModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+    }
+});
 });
