@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             Object.keys(educationData).forEach(key => {
                 const content = document.getElementById(`${key}Content`);
                 if (content) {
-                    // contentType을 소문자로 변환하여 비교
                     content.style.display = key.toLowerCase() === contentType.toLowerCase() ? 'block' : 'none';
                     if (key.toLowerCase() === contentType.toLowerCase()) {
                         content.innerHTML = educationData[key];
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (button) {
             button.addEventListener('click', () => {
                 console.log(`${type} button clicked`);
-                // type을 그대로 전달
                 showContent(type);
             });
         } else {
@@ -94,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Swiper 초기화
+    // Swiper 초기화 (마우스 휠 기능 추가)
     if (typeof Swiper !== 'undefined') {
         new Swiper('.swiper-container', {
             effect: 'coverflow',
@@ -117,20 +115,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            mousewheel: true, // 마우스 휠 기능 활성화
         });
     } else {
         console.error('Swiper is not loaded');
     }
 
-    // 타이핑 효과 (GSAP 사용)
+    // 타이핑 효과 (GSAP 사용) - 빠르고 간결하게 수정
     const typingText = document.querySelector("#typing-text");
     const textArray = [
-        "안녕하세요!<br>제 이름은 박장호입니다.",
-        "저는 의사소통 능력이 뛰어난<br>신입 개발자입니다.",
-        "항상 배우려는 자세로<br>끊임없이 성장하고 있습니다.",
-        "저의 가능성을 알아봐 주실<br>회사를 찾고 있습니다.",
-        "함께 발전해 나갈 수 있는<br>기회를 주시면 감사하겠습니다.",
-        "아래 Contact Information에서<br>연락처를 확인해 주세요!"
+        "안녕하세요! 제 이름은 박장호입니다.",
+        "의사소통 능력이 뛰어난 신입 개발자입니다.",
+        "항상 배우려는 자세로 끊임없이 성장합니다.",
+        "저의 가능성을 알아봐 주실 회사를 찾고 있습니다.",
+        "함께 발전해 나갈 수 있는 기회를 주세요!",
+        "아래에서 제 연락처를 확인해 주세요!"
     ];
 
     let currentTextIndex = 0;
@@ -141,24 +140,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const currentText = textArray[currentTextIndex];
-        let charIndex = 0;
 
         gsap.to(typingText, {
-            duration: 0.05,
+            duration: 1,
             text: {
                 value: currentText,
-                delimiter: "",
-                speed: 0.05
+                delimiter: ""
             },
             ease: "none",
             onComplete: () => {
                 setTimeout(() => {
                     gsap.to(typingText, {
-                        duration: 0.05,
+                        duration: 0.5,
                         text: {
                             value: "",
-                            delimiter: "",
-                            speed: 0.05
+                            delimiter: ""
                         },
                         ease: "none",
                         onComplete: () => {
@@ -166,21 +162,21 @@ document.addEventListener('DOMContentLoaded', function() {
                             typeText();
                         }
                     });
-                }, 2000);
+                }, 1500);
             }
         });
     }
 
     typeText();
 
-    // 스킬 바 애니메이션
+    // 스킬 바 애니메이션 (Font Awesome 아이콘 사용)
     const skills = [
-        { name: 'HTML', level: 90 },
-        { name: 'CSS', level: 85 },
-        { name: 'JavaScript', level: 80 },
-        { name: 'React', level: 75 },
-        { name: 'Node.js', level: 70 },
-        { name: 'Python', level: 85 },
+        { name: 'HTML', level: 90, icon: 'fab fa-html5' },
+        { name: 'CSS', level: 85, icon: 'fab fa-css3-alt' },
+        { name: 'JavaScript', level: 80, icon: 'fab fa-js' },
+        { name: 'React', level: 75, icon: 'fab fa-react' },
+        { name: 'Node.js', level: 70, icon: 'fab fa-node-js' },
+        { name: 'Python', level: 85, icon: 'fab fa-python' },
     ];
 
     const skillsContainer = document.querySelector('.skills-container');
@@ -189,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const skillElement = document.createElement('div');
         skillElement.classList.add('skill');
         skillElement.innerHTML = `
-            <i class="devicon-${skill.name.toLowerCase()}-plain"></i>
+            <i class="${skill.icon}"></i>
             <p>${skill.name}</p>
             <div class="skill-bar">
                 <div class="skill-progress" style="width: 0%"></div>
