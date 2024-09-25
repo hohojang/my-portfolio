@@ -83,30 +83,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Swiper 초기화
     const swiper = new Swiper('.swiper-container', {
-        effect: 'coverflow',
+        effect: 'slide', // 'coverflow' 대신 'slide' 사용
         grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-        },
+        centeredSlides: false, // 중앙 정렬 해제
+        slidesPerView: 1, // 한 번에 하나의 슬라이드만 표시
+        spaceBetween: 30, // 슬라이드 사이 간격
         pagination: {
             el: '.swiper-pagination',
+            clickable: true,
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        slideToClickedSlide: true,
-        loop: true,
-        loopAdditionalSlides: 3,
-        // 마우스 휠 컨트롤 추가
         mousewheel: {
             invert: false,
+            forceToAxis: true, // 수평 스크롤에만 반응하도록 설정
+        },
+        keyboard: {
+            enabled: true,
         },
     });
 
