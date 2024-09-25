@@ -4,7 +4,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
+    overflow-x: hidden;
 }
 
 header {
@@ -50,7 +50,6 @@ nav ul li a:hover::after {
     background: #fff;
 }
 
-/* 애니메이션 정의 */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -62,7 +61,6 @@ nav ul li a:hover::after {
     }
 }
 
-/* 섹션에 애니메이션 적용 */
 section {
     padding: 2rem;
     margin: 2rem 0;
@@ -74,7 +72,6 @@ section {
     transition: opacity 0.5s, transform 0.5s;
 }
 
-/* 스크롤 시 애니메이션 트리거 */
 section.visible {
     opacity: 1;
     transform: translateY(0);
@@ -106,7 +103,6 @@ section.visible {
     margin-bottom: 1.5rem;
 }
 
-/* 프로필 사진 스타일링 */
 .profile-container {
     display: flex;
     justify-content: center;
@@ -122,17 +118,15 @@ section.visible {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 스무스 스크롤 */
 html {
     scroll-behavior: smooth;
 }
 
-/* Swiper 스타일링 */
 .swiper-container {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
-    overflow: visible; /* Swiper 컨테이너의 오버플로우를 visible로 설정 */
+    overflow: visible;
 }
 
 .swiper-slide {
@@ -142,7 +136,6 @@ html {
     height: 300px;
 }
 
-/* 프로젝트 카드 스타일링 */
 .project {
     background: #fff;
     padding: 20px;
@@ -155,7 +148,6 @@ html {
     transform: translateY(-10px);
 }
 
-/* 유튜브 실버 버튼 스타일 */
 #contact p {
     font-size: 1.2rem;
     margin: 1rem 0;
@@ -164,6 +156,8 @@ html {
     border-radius: 10px;
     box-shadow: 5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 #contact p:hover {
@@ -176,6 +170,7 @@ html {
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
+    margin-left: 10px;
 }
 
 #contact a:hover {
@@ -183,7 +178,6 @@ html {
     text-decoration: underline;
 }
 
-/* 반응형 디자인 */
 @media (max-width: 768px) {
     body {
         padding: 1rem;
@@ -209,7 +203,7 @@ html {
     }
 
     .swiper-container {
-        touch-action: pan-y; /* 세로 스크롤만 허용 */
+        touch-action: pan-y;
     }
 }
 
@@ -230,7 +224,7 @@ html {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    width: 150px;
+    width: 100px;
 }
 
 .skill:hover {
@@ -243,7 +237,7 @@ html {
 }
 
 .skill i {
-    font-size: 3rem; /* 아이콘 크기 조정 */
+    font-size: 3rem;
     margin-bottom: 0.5rem;
 }
 
@@ -253,34 +247,32 @@ html {
 }
 
 #typing-text {
-    font-size: 2.5rem; /* 폰트 크기를 더 크게 증가 */
-    font-weight: 700; /* 글씨체를 더 두껍게 */
+    font-size: 2.5rem;
+    font-weight: 700;
     line-height: 1.4;
     margin-bottom: 1.5rem;
-    color: #333; /* 텍스트 색상을 진하게 */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 약간의 그림자 효과 추가 */
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
-/* 타이핑 커서 스타일 */
 .typed-cursor {
-    font-size: 2.5rem; /* 커서 크기도 텍스트와 맞춤 */
-    font-weight: 700; /* 커서도 두껍게 */
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
-/* 타이핑 효과 컨테이너에 여백 추가 */
 #about {
-    padding: 3rem 1rem; /* 위아래 여백 증가 */
+    padding: 3rem 1rem;
 }
 
 .typing-container {
-    height: 150px; /* 예상되는 최대 높이로 설정 */
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #typing-text {
-    min-height: 7.5rem; /* 3줄 기준 (2.5rem * 3) */
+    min-height: 7.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -289,16 +281,9 @@ html {
 
 @media (max-width: 768px) {
     #typing-text {
-        font-size: 1.8rem; /* 모바일에서 폰트 크기 조정 */
-        min-height: 5.4rem; /* 3줄 기준 (1.8rem * 3) */
+        font-size: 1.8rem;
+        min-height: 5.4rem;
     }
-}
-
-/* Education & Certifications 섹션 스타일 */
-.education-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .education-container button {
@@ -327,19 +312,13 @@ html {
     display: none;
 }
 
-/* Skills 섹션 스타일 수정 */
-.skill-bar {
-    width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin-top: 10px;
-    overflow: hidden;
+.github-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
 
-.skill-progress {
-    width: 0;
-    height: 100%;
-    background-color: #4CAF50;
-    transition: width 1s ease-in-out;
+.github-link {
+    display: flex;
+    align-items: center;
 }
