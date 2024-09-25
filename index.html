@@ -27,9 +27,16 @@
     <meta property="og:image:height" content="630">
     <meta name="description" content="박장호 포트폴리오 [PJH's Portfolio]">
     <link rel="image_src" href="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/portfolio-preview.png">
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <header class="gradient-bg">
         <h1>Jangho Park's Portfolio</h1>
         <nav>
             <ul>
@@ -44,7 +51,7 @@
 
     <main>
         <!-- About 섹션 -->
-        <section id="about">
+        <section id="about" class="gradient-bg">
             <h2 class="section-title">About Me</h2>
             <div class="profile-container">
                 <img src="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/profile-photo.jpg" alt="Profile Photo" class="profile-photo">
@@ -55,7 +62,7 @@
         </section>
 
         <!-- Education & Certifications 섹션 -->
-        <section id="education">
+        <section id="education" class="gradient-bg">
             <h2 class="section-title">Education & Certifications</h2>
             <div class="education-container">
                 <div class="education-buttons">
@@ -70,7 +77,7 @@
         </section>
 
         <!-- Skills 섹션 -->
-        <section id="skills">
+        <section id="skills" class="gradient-bg">
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
                 <!-- 스킬 요소들은 JavaScript에서 동적으로 생성됩니다 -->
@@ -78,11 +85,11 @@
         </section>
 
         <!-- Projects 섹션 -->
-        <section id="projects">
+        <section id="projects" class="gradient-bg">
             <h2 class="section-title">Projects</h2>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <!-- 프로젝트 슬라이드들 -->
+                    <!-- 기존 프로젝트 슬라이드 -->
                     <div class="swiper-slide">
                         <div class="project">
                             <h3>포트폴리오 웹사이트</h3>
@@ -92,7 +99,26 @@
                             <button class="project-details-btn" data-project="portfolio">상세 정보</button>
                         </div>
                     </div>
-                    <!-- 추가 프로젝트 슬라이드들... -->
+                    <!-- 새로운 프로젝트 슬라이드 1 -->
+                    <div class="swiper-slide">
+                        <div class="project">
+                            <h3>AI 챗봇 프로젝트</h3>
+                            <div class="project-preview">
+                                <img src="path/to/chatbot-preview.png" alt="AI 챗봇 프로젝트 미리보기">
+                            </div>
+                            <button class="project-details-btn" data-project="chatbot">상세 정보</button>
+                        </div>
+                    </div>
+                    <!-- 새로운 프로젝트 슬라이드 2 -->
+                    <div class="swiper-slide">
+                        <div class="project">
+                            <h3>IoT 스마트홈 시스템</h3>
+                            <div class="project-preview">
+                                <img src="path/to/smarthome-preview.png" alt="IoT 스마트홈 시스템 미리보기">
+                            </div>
+                            <button class="project-details-btn" data-project="smarthome">상세 정보</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div>
@@ -108,7 +134,7 @@
         </section>
 
         <!-- Contact 섹션 -->
-        <section id="contact">
+        <section id="contact" class="gradient-bg">
             <h2 class="section-title">Contact Information</h2>
             <div class="contact-info">
                 <a href="mailto:yuunnyso123@gmail.com" class="contact-item">
