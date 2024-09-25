@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Swiper 초기화
     const swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
-        grabCursor: false,
+        grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
         coverflowEffect: {
@@ -102,24 +102,32 @@ document.addEventListener('DOMContentLoaded', function() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        touchRatio: 0,
         keyboard: {
-            enabled: false,
+            enabled: true,
         },
         mousewheel: {
             invert: false,
         },
-        on: {
-            touchStart: function (e) {
-                e.preventDefault(); // 터치 이벤트 기본 동작 방지
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 20
             },
-        },
+            480: {
+                slidesPerView: 2,
+                spaceBetween: 30
+            },
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 40
+            }
+        }
     });
 
     // 타이핑 효과 (한국어)
     new Typed('#typing-text', {
         strings: [
-            "안녕하세요! 제 이름은 박장호입니다.",
+            "안녕하세요!<br>제 이름은 박장호입니다.",
             "저는 의사소통 능력이 뛰어난<br>신입 개발자입니다.",
             "항상 배우려는 자세로<br>끊임없이 성장하고 있습니다.",
             "저의 가능성을 알아봐 주실<br>회사를 찾고 있습니다.",
@@ -130,7 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
         backSpeed: 30,
         backDelay: 1000,
         loop: true,
-        contentType: 'html', // HTML 태그 사용 허용
+        contentType: 'html',
+        smartBackspace: true
     });
 
     // Skills 숙련도 애니메이션
