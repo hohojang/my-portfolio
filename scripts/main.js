@@ -134,27 +134,71 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Skills 숙련도 애니메이션
-    const skills = document.querySelectorAll('.skill');
+    const skillsContainer = document.querySelector('.skills-container');
     const skillLevels = {
-        'HTML': 90,
-        'CSS': 85,
+        'HTML5': 90,
+        'CSS3': 85,
         'JavaScript': 80,
         'Python': 75,
-        'C#': 70,
+        'CSharp': 70,
         'Arduino': 65
     };
 
-    skills.forEach(skill => {
-        const skillName = skill.querySelector('p').textContent;
+    // 숙련도 순으로 정렬
+    const sortedSkills = Object.entries(skillLevels).sort((a, b) => b[1] - a[1]);
+
+    // skillName에 따라 적절한 아이콘 클래스와 표시 이름을 반환하는 함수
+    function getSkillInfo(skillName) {
+        const iconClasses = {
+            'HTML5': 'devicon-html5-plain colored',
+            'CSS3': 'devicon-css3-plain colored',
+            'JavaScript': 'devicon-javascript-plain colored',
+            'Python': 'devicon-python-plain colored',
+            'CSharp': 'devicon-csharp-plain colored',
+            'Arduino': 'devicon-arduino-plain colored'
+        };
+        const displayNames = {
+            'HTML5': 'HTML',
+            'CSS3': 'CSS',
+            'CSharp': 'C#'
+        };
+        return {
+            iconClass: iconClasses[skillName],
+            displayName: displayNames[skillName] || skillName
+        };
+    }
+
+    sortedSkills.forEach(([skillName, level]) => {
+        const skill = document.createElement('div');
+        skill.className = 'skill';
+
+        const { iconClass, displayName } = getSkillInfo(skillName);
+
+        const icon = document.createElement('i');
+        icon.className = iconClass;
+
+        const name = document.createElement('p');
+        name.textContent = displayName;
+
         const skillBar = document.createElement('div');
         skillBar.className = 'skill-bar';
+
         const skillProgress = document.createElement('div');
         skillProgress.className = 'skill-progress';
+
+        const skillLevel = document.createElement('p');
+        skillLevel.className = 'skill-level';
+        skillLevel.textContent = `${level}%`;
+
         skillBar.appendChild(skillProgress);
+        skill.appendChild(icon);
+        skill.appendChild(name);
         skill.appendChild(skillBar);
+        skill.appendChild(skillLevel);
+        skillsContainer.appendChild(skill);
 
         setTimeout(() => {
-            skillProgress.style.width = `${skillLevels[skillName]}%`;
+            skillProgress.style.width = `${level}%`;
         }, 500);
     });
 });
