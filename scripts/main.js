@@ -212,89 +212,134 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 프로젝트 상세 정보
-    const projectDetails = `
-        <h4>사용 기술:</h4>
-        <ul>
-            <li>HTML5</li>
-            <li>CSS3</li>
-            <li>JavaScript</li>
-        </ul>
-        <h4>주요 기능:</h4>
-        <ul>
-            <li>반응형 디자인</li>
-            <li>동적 타이핑 효과 (Typed.js)</li>
-            <li>스킬 레벨 애니메이션</li>
-            <li>섹션별 페이드인 효과</li>
-        </ul>
-        <h4>성과:</h4>
-        <ul>
-            <li>모바일 및 데스크톱에서 반응형 디자인 구현</li>
-            <li>GitHub Pages를 활용한 웹사이트 배포</li>
-        </ul>
-        <h4>문제 해결:</h4>
-        <ul>
-            <li>반응형 디자인 구현:
+    const projectDetails = {
+        portfolio: {
+            title: "포트폴리오 웹사이트",
+            content: `
+                <h4>사용 기술:</h4>
                 <ul>
-                    <li>문제: 다양한 화면 크기에서 레이아웃 깨짐 현상 발생</li>
-                    <li>해결: CSS 미디어 쿼리를 활용하여 화면 크기별 스타일 조정</li>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
                 </ul>
-            </li>
-            <li>GitHub Pages 배포:
+                <h4>주요 기능:</h4>
                 <ul>
-                    <li>문제: 로컬에서는 정상 작동하지만 GitHub Pages에 배포 시 경로 문제 발생</li>
-                    <li>해결: 상대 경로를 사용하여 리소스 링크를 수정하여 해결</li>
+                    <li>반응형 디자인</li>
+                    <li>동적 타이핑 효과 (Typed.js)</li>
+                    <li>스킬 레벨 애니메이션</li>
+                    <li>섹션별 페이드인 효과</li>
                 </ul>
-            </li>
-        </ul>
-    `;
+                <h4>성과:</h4>
+                <ul>
+                    <li>모바일 및 데스크톱에서 반응형 디자인 구현</li>
+                    <li>GitHub Pages를 활용한 웹사이트 배포</li>
+                </ul>
+            `
+        },
+        project2: {
+            title: "프로젝트 2",
+            content: `
+                <h4>사용 기술:</h4>
+                <ul>
+                    <li>React</li>
+                    <li>Node.js</li>
+                    <li>Express</li>
+                    <li>MongoDB</li>
+                </ul>
+                <h4>주요 기능:</h4>
+                <ul>
+                    <li>사용자 인증 및 권한 관리</li>
+                    <li>실시간 데이터 업데이트</li>
+                    <li>RESTful API 구현</li>
+                </ul>
+                <h4>성과:</h4>
+                <ul>
+                    <li>1000+ 활성 사용자 확보</li>
+                    <li>클라우드 서버에 성공적으로 배포</li>
+                </ul>
+            `
+        },
+        project3: {
+            title: "프로젝트 3",
+            content: `
+                <h4>사용 기술:</h4>
+                <ul>
+                    <li>Python</li>
+                    <li>TensorFlow</li>
+                    <li>OpenCV</li>
+                </ul>
+                <h4>주요 기능:</h4>
+                <ul>
+                    <li>실시간 객체 인식</li>
+                    <li>다중 객체 추적</li>
+                    <li>데이터 시각화</li>
+                </ul>
+                <h4>성과:</h4>
+                <ul>
+                    <li>95% 이상의 정확도 달성</li>
+                    <li>로컬 및 클라우드 환경에서 구동 가능</li>
+                </ul>
+            `
+        }
+    };
 
-// 프로젝트 상세 정보 모달 기능
-const projectDetailsBtn = document.querySelector('.project-details-btn');
-const projectDetailsModal = document.querySelector('.project-details-modal');
-const closeBtn = document.querySelector('.close-btn');
-const projectDetailsContent = document.querySelector('.project-details-content');
-const modalContent = projectDetailsModal.querySelector('.modal-content');
+    // 프로젝트 상세 정보 모달 기능
+    const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
+    const projectDetailsModal = document.querySelector('.project-details-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const projectDetailsContent = document.querySelector('.project-details-content');
+    const modalContent = projectDetailsModal.querySelector('.modal-content');
+    const modalTitle = document.getElementById('modal-title');
 
-function openModal() {
-    projectDetailsModal.style.display = 'flex';
-    projectDetailsContent.innerHTML = projectDetails;
-    document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
-    
-    // 모달 창 크기 조정
-    modalContent.style.maxHeight = '90vh';
-    modalContent.style.overflowY = 'auto';
-    
-    // 스크롤을 맨 위로 이동
-    modalContent.scrollTop = 0;
-}
-
-function closeModal() {
-    projectDetailsModal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // 배경 스크롤 복원
-}
-
-projectDetailsBtn.addEventListener('click', function(e) {
-    e.stopPropagation(); // 이벤트 버블링 방지
-    openModal();
-});
-
-closeBtn.addEventListener('click', closeModal);
-
-// 모달 외부 클릭 시 닫기 (모바일 터치 포함)
-projectDetailsModal.addEventListener('click', closeModal);
-projectDetailsModal.addEventListener('touchstart', function(e) {
-    if (e.target === projectDetailsModal) {
-        closeModal();
+    function openModal(projectKey) {
+        const project = projectDetails[projectKey];
+        if (project) {
+            projectDetailsModal.style.display = 'flex';
+            modalTitle.textContent = project.title;
+            projectDetailsContent.innerHTML = project.content;
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+            
+            // 모달 창 크기 조정
+            modalContent.style.maxHeight = '90vh';
+            modalContent.style.overflowY = 'auto';
+            
+            // 스크롤을 맨 위로 이동
+            modalContent.scrollTop = 0;
+        } else {
+            console.error('Project details not found for key:', projectKey);
+        }
     }
-});
 
-// 모달 내부 클릭 시 이벤트 전파 중지
-modalContent.addEventListener('click', function(e) {
-    e.stopPropagation();
-});
-modalContent.addEventListener('touchstart', function(e) {
-    e.stopPropagation();
-});
+    function closeModal() {
+        projectDetailsModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+    }
+
+    projectDetailsButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // 이벤트 버블링 방지
+            const projectKey = this.dataset.project;
+            openModal(projectKey);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    // 모달 외부 클릭 시 닫기 (모바일 터치 포함)
+    projectDetailsModal.addEventListener('click', closeModal);
+    projectDetailsModal.addEventListener('touchstart', function(e) {
+        if (e.target === projectDetailsModal) {
+            closeModal();
+        }
+    });
+
+    // 모달 내부 클릭 시 이벤트 전파 중지
+    modalContent.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    modalContent.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    });
 
     // Education & Certifications 동적 안내 메시지
     const educationContainer = document.querySelector('.education-container');
