@@ -273,10 +273,23 @@ html {
 }
 
 .typing-container {
-    max-width: 800px; /* 타이핑 효과의 최대 너비 설정 */
-    margin: 0 auto; /* 중앙 정렬 */
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.8); /* 약간의 배경색 추가 */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 150px; /* 예상되는 최대 높이로 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#typing-text {
+    min-height: 7.5rem; /* 3줄 기준 (2.5rem * 3) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #typing-text {
+        font-size: 1.8rem; /* 모바일에서 폰트 크기 조정 */
+        min-height: 5.4rem; /* 3줄 기준 (1.8rem * 3) */
+    }
 }
