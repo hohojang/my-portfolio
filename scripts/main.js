@@ -105,23 +105,43 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     });
 
-    // 타이핑 효과 (한국어)
-    new Typed('#typing-text', {
-        strings: [
-            "안녕하세요!<br>제 이름은 박장호입니다.",
-            "저는 의사소통 능력이 뛰어난<br>신입 개발자입니다.",
-            "항상 배우려는 자세로<br>끊임없이 성장하고 있습니다.",
-            "저의 가능성을 알아봐 주실<br>회사를 찾고 있습니다.",
-            "함께 발전해 나갈 수 있는<br>기회를 주시면 감사하겠습니다.",
-            "아래 Contact Information에서<br>연락처를 확인해 주세요!"
-        ],
-        typeSpeed: 50,
-        backSpeed: 30,
-        backDelay: 1000,
-        loop: true,
-        contentType: 'html',
-        smartBackspace: true
-    });
+    // 타이핑 효과 (GSAP 사용)
+    const typingText = document.querySelector("#typing-text");
+    const textArray = [
+        "안녕하세요!<br>제 이름은 박장호입니다.",
+        "저는 의사소통 능력이 뛰어난<br>신입 개발자입니다.",
+        "항상 배우려는 자세로<br>끊임없이 성장하고 있습니다.",
+        "저의 가능성을 알아봐 주실<br>회사를 찾고 있습니다.",
+        "함께 발전해 나갈 수 있는<br>기회를 주시면 감사하겠습니다.",
+        "아래 Contact Information에서<br>연락처를 확인해 주세요!"
+    ];
+
+    gsap.registerPlugin(TextPlugin);
+
+    function animateText(index) {
+        gsap.to(typingText, {
+            duration: 2,
+            text: {
+                value: textArray[index],
+                delimiter: ""
+            },
+            ease: "none",
+            onComplete: () => {
+                gsap.to(typingText, {
+                    duration: 1,
+                    opacity: 0,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        typingText.innerHTML = "";
+                        gsap.set(typingText, {opacity: 1});
+                        animateText((index + 1) % textArray.length);
+                    }
+                });
+            }
+        });
+    }
+
+    animateText(0);
 
     // Skills 숙련도 애니메이션
     const skillsContainer = document.querySelector('.skills-container');
@@ -159,133 +179,94 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     sortedSkills.forEach(([skillName, level]) => {
-        const skill = document.createElement('div');
-        skill.className = 'skill';
-
         const { iconClass, displayName } = getSkillInfo(skillName);
+        const skillElement = document.createElement('div');
+        skillElement.classList.add('skill');
+        skillElement.innerHTML = `
+            <i class="${iconClass}"></i>
+            <p>${displayName}</p>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: 0%"></div>
+            </div>
+            <p class="skill-level">0%</p>
+        `;
+        skillsContainer.appendChild(skillElement);
 
-        const icon = document.createElement('i');
-        icon.className = iconClass;
-
-        const name = document.createElement('p');
-        name.textContent = displayName;
-
-        const skillBar = document.createElement('div');
-        skillBar.className = 'skill-bar';
-
-        const skillProgress = document.createElement('div');
-        skillProgress.className = 'skill-progress';
-
-        const skillLevel = document.createElement('p');
-        skillLevel.className = 'skill-level';
-        skillLevel.textContent = `${level}%`;
-
-        skillBar.appendChild(skillProgress);
-        skill.appendChild(icon);
-        skill.appendChild(name);
-        skill.appendChild(skillBar);
-        skill.appendChild(skillLevel);
-        skillsContainer.appendChild(skill);
-
+        // 애니메이션 효과
         setTimeout(() => {
-            skillProgress.style.width = `${level}%`;
+            const progressBar = skillElement.querySelector('.skill-progress');
+            const skillLevelText = skillElement.querySelector('.skill-level');
+            progressBar.style.width = `${level}%`;
+            let currentLevel = 0;
+            const intervalId = setInterval(() => {
+                if (currentLevel < level) {
+                    currentLevel++;
+                    skillLevelText.textContent = `${currentLevel}%`;
+                } else {
+                    clearInterval(intervalId);
+                }
+            }, 20);
         }, 500);
     });
 
-    // 프로젝트 상세 정보
+    // 프로젝트 상세 정보 모달
+    const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
+    const projectDetailsModal = document.querySelector('.project-details-modal');
+    const modalContent = projectDetailsModal.querySelector('.modal-content');
+    const closeBtn = projectDetailsModal.querySelector('.close-btn');
+
     const projectDetails = {
         portfolio: {
-            title: "포트폴리오 웹사이트",
-            content: `
-                <h4>사용 기술:</h4>
-                <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                </ul>
-                <h4>주요 기능:</h4>
-                <ul>
-                    <li>반응형 디자인</li>
-                    <li>동적 타이핑 효과 (Typed.js)</li>
-                    <li>스킬 레벨 애니메이션</li>
-                    <li>섹션별 페이드인 효과</li>
-                </ul>
-                <h4>성과:</h4>
-                <ul>
-                    <li>모바일 및 데스크톱에서 반응형 디자인 구현</li>
-                    <li>GitHub Pages를 활용한 웹사이트 배포</li>
-                </ul>
-            `
+            title: '포트폴리오 웹사이트',
+            description: '개인 포트폴리오를 위한 반응형 웹사이트',
+            features: [
+                '반응형 디자인',
+                '인터랙티브 요소',
+                'CSS 애니메이션',
+                'JavaScript를 이용한 동적 콘텐츠'
+            ],
+            technologies: ['HTML', 'CSS', 'JavaScript', 'Swiper.js']
         },
         project2: {
-            title: "프로젝트 2",
-            content: `
-                <h4>사용 기술:</h4>
-                <ul>
-                    <li>React</li>
-                    <li>Node.js</li>
-                    <li>Express</li>
-                    <li>MongoDB</li>
-                </ul>
-                <h4>주요 기능:</h4>
-                <ul>
-                    <li>사용자 인증 및 권한 관리</li>
-                    <li>실시간 데이터 업데이트</li>
-                    <li>RESTful API 구현</li>
-                </ul>
-                <h4>성과:</h4>
-                <ul>
-                    <li>1000+ 활성 사용자 확보</li>
-                    <li>클라우드 서버에 성공적으로 배포</li>
-                </ul>
-            `
+            title: '프로젝트 2',
+            description: '프로젝트 2에 대한 설명',
+            features: [
+                '기능 1',
+                '기능 2',
+                '기능 3'
+            ],
+            technologies: ['기술 1', '기술 2', '기술 3']
         },
         project3: {
-            title: "프로젝트 3",
-            content: `
-                <h4>사용 기술:</h4>
-                <ul>
-                    <li>Python</li>
-                    <li>TensorFlow</li>
-                    <li>OpenCV</li>
-                </ul>
-                <h4>주요 기능:</h4>
-                <ul>
-                    <li>실시간 객체 인식</li>
-                    <li>다중 객체 추적</li>
-                    <li>데이터 시각화</li>
-                </ul>
-                <h4>성과:</h4>
-                <ul>
-                    <li>95% 이상의 정확도 달성</li>
-                    <li>로컬 및 클라우드 환경에서 구동 가능</li>
-                </ul>
-            `
+            title: '프로젝트 3',
+            description: '프로젝트 3에 대한 설명',
+            features: [
+                '기능 1',
+                '기능 2',
+                '기능 3'
+            ],
+            technologies: ['기술 1', '기술 2', '기술 3']
         }
     };
 
-    // 프로젝트 상세 정보 모달 기능
-    const projectDetailsButtons = document.querySelectorAll('.project-details-btn');
-    const projectDetailsModal = document.querySelector('.project-details-modal');
-    const closeBtn = document.querySelector('.close-btn');
-    const projectDetailsContent = document.querySelector('.project-details-content');
-    const modalContent = projectDetailsModal.querySelector('.modal-content');
-    const modalTitle = document.getElementById('modal-title');
-
     function openModal(projectKey) {
-        const project = projectDetails[projectKey];
-        if (project) {
+        const details = projectDetails[projectKey];
+        if (details) {
+            modalContent.innerHTML = `
+                <span class="close-btn">&times;</span>
+                <h3>${details.title}</h3>
+                <p>${details.description}</p>
+                <h4>주요 기능:</h4>
+                <ul>
+                    ${details.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+                <h4>사용된 기술:</h4>
+                <ul>
+                    ${details.technologies.map(tech => `<li>${tech}</li>`).join('')}
+                </ul>
+            `;
             projectDetailsModal.style.display = 'flex';
-            modalTitle.textContent = project.title;
-            projectDetailsContent.innerHTML = project.content;
             document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
-            
-            // 모달 창 크기 조정
-            modalContent.style.maxHeight = '90vh';
-            modalContent.style.overflowY = 'auto';
-            
-            // 스크롤을 맨 위로 이동
-            modalContent.scrollTop = 0;
         } else {
             console.error('Project details not found for key:', projectKey);
         }
@@ -334,5 +315,36 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', () => {
             guidanceMessage.style.display = 'none';
         });
+    });
+
+    // Add smooth scrolling for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add a scroll-to-top button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '&#8593;';
+    scrollToTopBtn.className = 'scroll-to-top';
+    document.body.appendChild(scrollToTopBtn);
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
     });
 });
