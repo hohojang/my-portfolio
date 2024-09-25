@@ -72,21 +72,28 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById(`show${type}`).addEventListener('click', () => showContent(type.toLowerCase()));
     });
 
-    // Swiper 초기화
+    // Swiper 초기화 수정
     if (typeof Swiper !== 'undefined') {
         new Swiper('.swiper-container', {
-            effect: 'slide',
+            effect: 'coverflow',
             grabCursor: true,
-            centeredSlides: false,
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: { el: '.swiper-pagination', clickable: true },
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            mousewheel: { invert: false, forceToAxis: true },
-            keyboard: { enabled: true },
         });
     } else {
         console.error('Swiper is not loaded');
@@ -180,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     });
 
-    // 프로젝트 상세 정보 모달
+    // 프로젝트 상세 정보 모달 업데이트
     const projectDetails = {
         portfolio: {
             title: '포트폴리오 웹사이트',
@@ -193,17 +200,27 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             technologies: ['HTML', 'CSS', 'JavaScript', 'Swiper.js']
         },
-        project2: {
-            title: '프로젝트 2',
-            description: '프로젝트 2에 대한 설명',
-            features: ['기능 1', '기능 2', '기능 3'],
-            technologies: ['기술 1', '기술 2', '기술 3']
+        chatbot: {
+            title: 'AI 챗봇 프로젝트',
+            description: '자연어 처리를 이용한 지능형 챗봇 시스템',
+            features: [
+                '자연어 처리 알고리즘',
+                '실시간 대화 기능',
+                '다국어 지원',
+                '사용자 맞춤형 응답'
+            ],
+            technologies: ['Python', 'TensorFlow', 'NLP', 'Flask']
         },
-        project3: {
-            title: '프로젝트 3',
-            description: '프로젝트 3에 대한 설명',
-            features: ['기능 1', '기능 2', '기능 3'],
-            technologies: ['기술 1', '기술 2', '기술 3']
+        smarthome: {
+            title: 'IoT 스마트홈 시스템',
+            description: '사물인터넷 기술을 활용한 스마트홈 제어 시스템',
+            features: [
+                '원격 기기 제어',
+                '에너지 사용량 모니터링',
+                '음성 명령 지원',
+                '자동화 시나리오 설정'
+            ],
+            technologies: ['Arduino', 'Raspberry Pi', 'MQTT', 'Node.js']
         }
     };
 
