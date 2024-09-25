@@ -25,6 +25,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Education & Certifications 섹션
+    const showEducationBtn = document.getElementById('showEducation');
+    const showCertificationsBtn = document.getElementById('showCertifications');
+    const showMilitaryServiceBtn = document.getElementById('showMilitaryService');
+    const educationContent = document.getElementById('educationContent');
+    const certificationsContent = document.getElementById('certificationsContent');
+    const militaryServiceContent = document.getElementById('militaryServiceContent');
+
+    showEducationBtn.addEventListener('click', function() {
+        educationContent.style.display = 'block';
+        educationContent.innerHTML = `
+            <h3>Education</h3>
+            <ul>
+                <li>목원대학교 지능로봇공학과 졸업 (2018년 03월 - 2024년 02월)</li>
+                <li>대전지족고등학교 졸업 (2014년 - 2017년)</li>
+            </ul>
+        `;
+        certificationsContent.style.display = 'none';
+        militaryServiceContent.style.display = 'none';
+    });
+
+    showCertificationsBtn.addEventListener('click', function() {
+        certificationsContent.style.display = 'block';
+        certificationsContent.innerHTML = `
+            <h3>Certifications</h3>
+            <ul>
+                <li>IOT지식능력검정자격증 (2023년 12월 08일)</li>
+                <li>자동차운전면허증 2종 보통 (2017년 12월 22일)</li>
+            </ul>
+            <h3>Training Completion</h3>
+            <ul>
+                <li>DSC공유대학 Amazon DeepRacer 자율주행교육 (2023년 11월 24일 ~ 2023년 11월 24일)</li>
+                <li>(주)새온 생산파트 인턴십 (2022년 11월 ~ 2023년 02월)
+                    <p>활동내용: 제품의 펌웨어를 업데이트 및 코드를 삽입하고 조향, 센서들의 이상 유무를 파악하고 점검과 교체를 하는 업무를 담당</p>
+                </li>
+            </ul>
+        `;
+        educationContent.style.display = 'none';
+        militaryServiceContent.style.display = 'none';
+    });
+
+    showMilitaryServiceBtn.addEventListener('click', function() {
+        militaryServiceContent.style.display = 'block';
+        militaryServiceContent.innerHTML = `
+            <h3>Military Service</h3>
+            <ul>
+                <li>복무기간: 2018년 3월 18일 ~ 2020년 10월 20일</li>
+                <li>군별: 해병대</li>
+                <li>계급: 병장</li>
+                <li>병과: 상륙군운용통신</li>
+            </ul>
+        `;
+        educationContent.style.display = 'none';
+        certificationsContent.style.display = 'none';
+    });
+
     // Swiper 초기화
     const swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
@@ -75,43 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
         backDelay: 1000,
         loop: true,
         contentType: 'html', // HTML 태그 사용 허용
-    });
-
-    // Education & Certifications 섹션
-    const showEducationBtn = document.getElementById('showEducation');
-    const showCertificationsBtn = document.getElementById('showCertifications');
-    const educationContent = document.getElementById('educationContent');
-    const certificationsContent = document.getElementById('certificationsContent');
-
-    showEducationBtn.addEventListener('click', function() {
-        educationContent.style.display = 'block';
-        educationContent.innerHTML = `
-            <h3>Education</h3>
-            <ul>
-                <li>목원대학교 지능로봇공학과 졸업 (2018년 03월 - 2024년 02월)</li>
-                <li>대전지족고등학교 졸업 (2014년 - 2017년)</li>
-            </ul>
-        `;
-        certificationsContent.style.display = 'none';
-    });
-
-    showCertificationsBtn.addEventListener('click', function() {
-        certificationsContent.style.display = 'block';
-        certificationsContent.innerHTML = `
-            <h3>Certifications</h3>
-            <ul>
-                <li>IOT지식능력검정자격증 (2023년 12월 08일)</li>
-                <li>자동차운전면허증 2종 보통 (2017년 12월 22일)</li>
-            </ul>
-            <h3>Training Completion</h3>
-            <ul>
-                <li>DSC공유대학 Amazon DeepRacer 자율주행교육 (2023년 11월 24일 ~ 2023년 11월 24일)</li>
-                <li>(주)새온 생산파트 인턴십 (2022년 11월 ~ 2023년 02월)
-                    <p>활동내용: 제품의 펌웨어를 업데이트 및 코드를 삽입하고 조향, 센서들의 이상 유무를 파악하고 점검과 교체를 하는 업무를 담당</p>
-                </li>
-            </ul>
-        `;
-        educationContent.style.display = 'none';
     });
 
     // Skills 숙련도 애니메이션
