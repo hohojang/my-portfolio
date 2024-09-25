@@ -96,158 +96,23 @@ section.visible {
     transform: translateX(-50%);
     width: 100px;
     height: 4px;
-    background: linear-gradient(to right, #333, #999);
-}
-
-.project {
-    margin-bottom: 1.5rem;
+    background-color: #333;
 }
 
 .profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .profile-photo {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
     object-fit: cover;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-.swiper-container {
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    overflow: visible;
-}
-
-.swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 300px;
-    height: 300px;
-}
-
-.project {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.project:hover {
-    transform: translateY(-10px);
-}
-
-#contact p {
-    font-size: 1.2rem;
-    margin: 1rem 0;
-    padding: 1rem;
-    background: linear-gradient(145deg, #e6e6e6, #ffffff);
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-}
-
-#contact p:hover {
-    transform: translateY(-5px);
-    box-shadow: 8px 8px 20px #d1d1d1, -8px -8px 20px #ffffff;
-}
-
-#contact a {
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    margin-left: 10px;
-}
-
-#contact a:hover {
-    color: #0366d6;
-    text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-
-    header {
-        padding: 1rem;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 0.5rem 0;
-    }
-
-    section {
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-
-    .profile-photo {
-        width: 100px;
-        height: 100px;
-    }
-
-    .swiper-container {
-        touch-action: pan-y;
-    }
-
-    /* Education & Certifications 섹션 모바일 스타일 */
-    .education-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .education-container button {
-        width: 100%;
-        margin: 5px 0;
-        font-size: 0.9rem;
-        padding: 8px 12px;
-    }
-
-    .content-box {
-        width: 100%;
-        font-size: 0.9rem;
-    }
-
-    /* Skills 섹션 모바일 스타일 */
-    .skill {
-        width: 120px;
-    }
-
-    .skill i {
-        font-size: 2.5rem;
-    }
-
-    .skill p {
-        font-size: 0.9rem;
-    }
-
-    .skill-bar {
-        height: 8px;
-    }
-
-    .skill-level {
-        font-size: 0.8rem;
-    }
-}
-
-/* Skills 컨테이너 레이아웃 수정 */
 .skills-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -305,36 +170,6 @@ html {
     color: #666;
 }
 
-@media (max-width: 768px) {
-    .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .skill {
-        width: 150px;
-    }
-
-    .skill i {
-        font-size: 2.5rem;
-    }
-
-    .skill p {
-        font-size: 0.9rem;
-    }
-
-    .skill-bar {
-        height: 8px;
-    }
-
-    .skill-level {
-        font-size: 0.8rem;
-    }
-}
-
-#skills {
-    text-align: center;
-}
-
 #typing-text {
     font-size: 2.5rem;
     font-weight: 700;
@@ -366,13 +201,6 @@ html {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-@media (max-width: 768px) {
-    #typing-text {
-        font-size: 1.8rem;
-        min-height: 5.4rem;
-    }
 }
 
 .education-container button {
@@ -412,7 +240,6 @@ html {
     align-items: center;
 }
 
-/* 반응형 디자인 개선 */
 @media (max-width: 768px) {
     body {
         font-size: 14px;
@@ -464,21 +291,21 @@ html {
     }
 
     .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
     }
 
     .skill {
-        width: 130px;
-        padding: 0.8rem;
+        width: 100%;
+        padding: 0.5rem;
     }
 
     .skill i {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .skill p {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
 
     .skill-bar {
@@ -524,12 +351,22 @@ html {
     }
 
     .skills-container {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.3rem;
     }
 
     .skill {
         width: 100%;
-        max-width: 200px;
+        max-width: none;
+        padding: 0.3rem;
+    }
+
+    .skill i {
+        font-size: 1.2rem;
+    }
+
+    .skill p {
+        font-size: 0.6rem;
     }
 
     .swiper-slide {
