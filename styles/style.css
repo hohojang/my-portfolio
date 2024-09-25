@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -27,6 +27,7 @@ nav ul li a {
     color: #fff;
     text-decoration: none;
     position: relative;
+    font-weight: 600;
 }
 
 nav ul li a::after {
@@ -76,6 +77,28 @@ section {
 section.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, #333, #999);
 }
 
 .project {
@@ -130,6 +153,34 @@ html {
     transform: translateY(-10px);
 }
 
+/* 유튜브 실버 버튼 스타일 */
+#contact p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff;
+    transition: all 0.3s ease;
+}
+
+#contact p:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 20px #d1d1d1, -8px -8px 20px #ffffff;
+}
+
+#contact a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#contact a:hover {
+    color: #0366d6;
+    text-decoration: underline;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     body {
@@ -154,4 +205,72 @@ html {
         width: 100px;
         height: 100px;
     }
+}
+
+#skills {
+    text-align: center;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.skill {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 100px;
+}
+
+.skill:hover {
+    transform: translateY(-10px);
+}
+
+.skill img {
+    width: 50px;
+    height: 50px;
+}
+
+.skill i {
+    font-size: 3rem; /* 아이콘 크기 조정 */
+    margin-bottom: 0.5rem;
+}
+
+.skill p {
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+#typing-text {
+    font-size: 2.5rem; /* 폰트 크기를 더 크게 증가 */
+    font-weight: 700; /* 글씨체를 더 두껍게 */
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: #333; /* 텍스트 색상을 진하게 */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 약간의 그림자 효과 추가 */
+}
+
+/* 타이핑 커서 스타일 */
+.typed-cursor {
+    font-size: 2.5rem; /* 커서 크기도 텍스트와 맞춤 */
+    font-weight: 700; /* 커서도 두껍게 */
+}
+
+/* 타이핑 효과 컨테이너에 여백 추가 */
+#about {
+    padding: 3rem 1rem; /* 위아래 여백 증가 */
+}
+
+.typing-container {
+    max-width: 800px; /* 타이핑 효과의 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8); /* 약간의 배경색 추가 */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
