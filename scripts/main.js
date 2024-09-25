@@ -133,60 +133,64 @@ document.addEventListener('DOMContentLoaded', function() {
         "아래 Contact Information에서<br>연락처를 확인해 주세요!"
     ];
 
-    if (typeof gsap !== 'undefined' && typeof gsap.registerPlugin === 'function') {
-        gsap.registerPlugin(TextPlugin);
-    } else {
-        console.error('GSAP or TextPlugin is not loaded');
-    }
+    let currentTextIndex = 0;
 
-    function animateText(index) {
-        try {
-            gsap.to(typingText, {
-                duration: 2,
-                text: { value: textArray[index], delimiter: "" },
-                ease: "none",
-                onComplete: () => {
+    function typeText() {
+        if (currentTextIndex >= textArray.length) {
+            currentTextIndex = 0;
+        }
+
+        const currentText = textArray[currentTextIndex];
+        let charIndex = 0;
+
+        gsap.to(typingText, {
+            duration: 0.05,
+            text: {
+                value: currentText,
+                delimiter: "",
+                speed: 0.05
+            },
+            ease: "none",
+            onComplete: () => {
+                setTimeout(() => {
                     gsap.to(typingText, {
-                        duration: 1,
-                        opacity: 0,
-                        ease: "power2.in",
+                        duration: 0.05,
+                        text: {
+                            value: "",
+                            delimiter: "",
+                            speed: 0.05
+                        },
+                        ease: "none",
                         onComplete: () => {
-                            typingText.innerHTML = "";
-                            gsap.set(typingText, {opacity: 1});
-                            animateText((index + 1) % textArray.length);
+                            currentTextIndex++;
+                            typeText();
                         }
                     });
-                }
-            });
-        } catch (error) {
-            console.error('Error in function:', error);
-        }
+                }, 2000);
+            }
+        });
     }
 
-    animateText(0);
+    typeText();
 
-    // Skills 숙련도 애니메이션
-    const skillLevels = {
-        'Python': 90, 'HTML5': 80, 'CSS3': 80, 'JavaScript': 80, 'CSharp': 70, 'Arduino': 80
-    };
-
-    const skillInfo = {
-        'HTML5': { iconClass: 'devicon-html5-plain colored', displayName: 'HTML' },
-        'CSS3': { iconClass: 'devicon-css3-plain colored', displayName: 'CSS' },
-        'JavaScript': { iconClass: 'devicon-javascript-plain colored', displayName: 'JavaScript' },
-        'Python': { iconClass: 'devicon-python-plain colored', displayName: 'Python' },
-        'CSharp': { iconClass: 'devicon-csharp-plain colored', displayName: 'C#' },
-        'Arduino': { iconClass: 'devicon-arduino-plain colored', displayName: 'Arduino' }
-    };
+    // 스킬 바 애니메이션
+    const skills = [
+        { name: 'HTML', level: 90 },
+        { name: 'CSS', level: 85 },
+        { name: 'JavaScript', level: 80 },
+        { name: 'React', level: 75 },
+        { name: 'Node.js', level: 70 },
+        { name: 'Python', level: 85 },
+    ];
 
     const skillsContainer = document.querySelector('.skills-container');
-    Object.entries(skillLevels).sort((a, b) => b[1] - a[1]).forEach(([skillName, level]) => {
-        const { iconClass, displayName } = skillInfo[skillName];
+
+    skills.forEach(skill => {
         const skillElement = document.createElement('div');
         skillElement.classList.add('skill');
         skillElement.innerHTML = `
-            <i class="${iconClass}"></i>
-            <p>${displayName}</p>
+            <i class="devicon-${skill.name.toLowerCase()}-plain"></i>
+            <p>${skill.name}</p>
             <div class="skill-bar">
                 <div class="skill-progress" style="width: 0%"></div>
             </div>
@@ -194,20 +198,19 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         skillsContainer.appendChild(skillElement);
 
-        setTimeout(() => {
-            const progressBar = skillElement.querySelector('.skill-progress');
-            const skillLevelText = skillElement.querySelector('.skill-level');
-            progressBar.style.width = `${level}%`;
-            let currentLevel = 0;
-            const intervalId = setInterval(() => {
-                if (currentLevel < level) {
-                    currentLevel++;
-                    skillLevelText.textContent = `${currentLevel}%`;
-                } else {
-                    clearInterval(intervalId);
-                }
-            }, 20);
-        }, 500);
+        const skillProgress = skillElement.querySelector('.skill-progress');
+        const skillLevelText = skillElement.querySelector('.skill-level');
+
+        gsap.to(skillProgress, {
+            width: `${skill.level}%`,
+            duration: 1.5,
+            ease: 'power2.out',
+            delay: 0.5,
+            onUpdate: function() {
+                const progress = Math.round(this.progress() * skill.level);
+                skillLevelText.textContent = `${progress}%`;
+            }
+        });
     });
 
     // 프로젝트 상세 정보 모달 업데이트
@@ -304,25 +307,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 스크롤 투 탑 버튼
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '&#8593;';
-    scrollToTopBtn.className = 'scroll-to-top';
-    document.body.appendChild(scrollToTopBtn);
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
     scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     window.addEventListener('scroll', () => {
-        scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
     });
 
     function initializeFeatures() {
         if (typeof Swiper !== 'undefined') {
-            // Swiper 초기화
+            // Swiper 초기화 (이미 위에서 수행됨)
         }
         if (typeof gsap !== 'undefined') {
-            // GSAP 관련 기능 초기화
+            // GSAP 관련 기능 초기화 (이미 위에서 수행됨)
         }
         // 기타 기능 초기화
     }
