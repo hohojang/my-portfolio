@@ -248,13 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
         </ul>
     `;
 
-// 프로젝트 상세 정보 모달 기능
+  // 프로젝트 상세 정보 모달 기능
 const projectDetailsBtn = document.querySelector('.project-details-btn');
 const projectDetailsModal = document.querySelector('.project-details-modal');
 const closeBtn = document.querySelector('.close-btn');
 const projectDetailsContent = document.querySelector('.project-details-content');
 
-projectDetailsBtn.addEventListener('click', function() {
+function openModal() {
     projectDetailsModal.style.display = 'flex';
     projectDetailsContent.innerHTML = projectDetails;
     document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
@@ -266,17 +266,42 @@ projectDetailsBtn.addEventListener('click', function() {
     
     // 스크롤을 맨 위로 이동
     modalContent.scrollTop = 0;
-});
+}
 
-closeBtn.addEventListener('click', function() {
+function closeModal() {
     projectDetailsModal.style.display = 'none';
     document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+}
+
+projectDetailsBtn.addEventListener('click', function(e) {
+    e.stopPropagation(); // 이벤트 버블링 방지
+    openModal();
 });
+
+closeBtn.addEventListener('click', closeModal);
 
 projectDetailsModal.addEventListener('click', function(event) {
     if (event.target === projectDetailsModal) {
-        projectDetailsModal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+        closeModal();
     }
 });
+
+// 모달 내부 클릭 시 이벤트 전파 중지
+projectDetailsModal.querySelector('.modal-content').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+    // Education & Certifications 동적 안내 메시지
+    const educationContainer = document.querySelector('.education-container');
+    const guidanceMessage = document.createElement('p');
+    guidanceMessage.textContent = '버튼을 클릭하여 정보를 확인하세요.';
+    guidanceMessage.classList.add('guidance-message');
+    educationContainer.insertBefore(guidanceMessage, educationContainer.firstChild);
+
+    const educationButtons = document.querySelectorAll('.education-container button');
+    educationButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            guidanceMessage.style.display = 'none';
+        });
+    });
 });
