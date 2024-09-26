@@ -189,17 +189,64 @@ document.addEventListener('DOMContentLoaded', function() {
     projectDetailsModal.addEventListener('click', closeModal);
     modalContent.addEventListener('click', (e) => e.stopPropagation());
 
-    // Education & Certifications 동적 안내 메시지
-    const educationContainer = document.querySelector('.education-container');
-    const guidanceMessage = document.createElement('p');
-    guidanceMessage.textContent = '버튼을 클릭하여 정보를 확인하세요.';
-    guidanceMessage.classList.add('guidance-message');
-    educationContainer.insertBefore(guidanceMessage, educationContainer.firstChild);
+    // Education & Certifications 섹션 설정
+    const educationData = {
+        education: `
+            <h3>Education</h3>
+            <ul>
+                <li>목원대학교 지능로봇공학과 졸업 (2018년 03월 - 2024년 02월)</li>
+                <li>대전지족고등학교 졸업 (2014년 - 2017년)</li>
+            </ul>
+        `,
+        certifications: `
+            <h3>Certifications</h3>
+            <ul>
+                <li>IOT지식능력검정자격증 (2023년 12월 08일)</li>
+                <li>자동차운전면허증 2종 보통 (2017년 12월 22일)</li>
+            </ul>
+            <h3>Training Completion</h3>
+            <ul>
+                <li>DSC공유대학 Amazon DeepRacer 자율주행교육 (2023년 11월 24일 ~ 2023년 11월 24일)</li>
+                <li>(주)새온 생산파트 인턴십 (2022년 11월 ~ 2023년 02월)
+                    <p>활동내용: 제품의 펌웨어를 업데이트 및 코드를 삽입하고 조향, 센서들의 이상 유무를 파악하고 점검과 교체를 하는 업무를 담당</p>
+                </li>
+            </ul>
+        `,
+        militaryService: `
+            <h3>Military Service</h3>
+            <ul>
+                <li>복무기간: 2018년 3월 18일 ~ 2020년 10월 20일</li>
+                <li>군별: 해병대</li>
+                <li>계급: 병장</li>
+                <li>병과: 상륙군운용통신</li>
+            </ul>
+        `
+    };
 
-    document.querySelectorAll('.education-container button').forEach(button => {
-        button.addEventListener('click', () => {
-            guidanceMessage.style.display = 'none';
+    function showContent(contentType) {
+        Object.keys(educationData).forEach(key => {
+            const content = document.getElementById(`${key}Content`);
+            if (content) {
+                content.style.display = key.toLowerCase() === contentType.toLowerCase() ? 'block' : 'none';
+                if (key.toLowerCase() === contentType.toLowerCase()) {
+                    content.innerHTML = educationData[key];
+                }
+            }
         });
+        const guidanceMessage = document.querySelector('.guidance-message');
+        if (guidanceMessage) {
+            guidanceMessage.style.display = 'none';
+        }
+    }
+
+    const buttons = ['Education', 'Certifications', 'MilitaryService'];
+    buttons.forEach(type => {
+        const button = document.getElementById(`show${type}`);
+        if (button) {
+            button.addEventListener('click', () => {
+                showContent(type);
+            });
+        }
     });
 
     // 스크롤 투 탑 버튼
