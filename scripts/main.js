@@ -21,107 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Education & Certifications 섹션 설정
-    const educationData = {
-        education: `
-            <h3>Education</h3>
-            <ul>
-                <li>목원대학교 지능로봇공학과 졸업 (2018년 03월 - 2024년 02월)</li>
-                <li>대전지족고등학교 졸업 (2014년 - 2017년)</li>
-            </ul>
-        `,
-        certifications: `
-            <h3>Certifications</h3>
-            <ul>
-                <li>IOT지식능력검정자격증 (2023년 12월 08일)</li>
-                <li>자동차운전면허증 2종 보통 (2017년 12월 22일)</li>
-            </ul>
-            <h3>Training Completion</h3>
-            <ul>
-                <li>DSC공유대학 Amazon DeepRacer 자율주행교육 (2023년 11월 24일 ~ 2023년 11월 24일)</li>
-                <li>(주)새온 생산파트 인턴십 (2022년 11월 ~ 2023년 02월)
-                    <p>활동내용: 제품의 펌웨어를 업데이트 및 코드를 삽입하고 조향, 센서들의 이상 유무를 파악하고 점검과 교체를 하는 업무를 담당</p>
-                </li>
-            </ul>
-        `,
-        militaryService: `
-            <h3>Military Service</h3>
-            <ul>
-                <li>복무기간: 2018년 3월 18일 ~ 2020년 10월 20일</li>
-                <li>군별: 해병대</li>
-                <li>계급: 병장</li>
-                <li>병과: 상륙군운용통신</li>
-            </ul>
-        `
-    };
-
-    function showContent(contentType) {
-        console.log('showContent called with:', contentType);
-        try {
-            Object.keys(educationData).forEach(key => {
-                const content = document.getElementById(`${key}Content`);
-                if (content) {
-                    content.style.display = key.toLowerCase() === contentType.toLowerCase() ? 'block' : 'none';
-                    if (key.toLowerCase() === contentType.toLowerCase()) {
-                        content.innerHTML = educationData[key];
-                        console.log(`Content set for ${key}`);
-                    }
-                } else {
-                    console.error(`Element not found: ${key}Content`);
-                }
-            });
-            const guidanceMessage = document.querySelector('.guidance-message');
-            if (guidanceMessage) {
-                guidanceMessage.style.display = 'none';
-            }
-        } catch (error) {
-            console.error('Error in showContent function:', error);
-        }
-    }
-
-    const buttons = ['Education', 'Certifications', 'MilitaryService'];
-    buttons.forEach(type => {
-        const button = document.getElementById(`show${type}`);
-        if (button) {
-            button.addEventListener('click', () => {
-                console.log(`${type} button clicked`);
-                showContent(type);
-            });
-        } else {
-            console.error(`Button not found: show${type}`);
-        }
-    });
-
-    // Swiper 초기화 (마우스 휠 기능 추가)
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.swiper-container', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            initialSlide: 1,
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            mousewheel: true, // 마우스 휠 기능 활성화
-        });
-    } else {
-        console.error('Swiper is not loaded');
-    }
-
-    // 타이핑 효과 (GSAP 사용) - 빠르고 간결하게 수정
+    // 타이핑 효과 (GSAP 사용)
     const typingText = document.querySelector("#typing-text");
     const textArray = [
         "안녕하세요! 제 이름은 박장호입니다.",
@@ -169,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     typeText();
 
-    // 스킬 바 애니메이션 (Font Awesome 아이콘 사용)
+    // 스킬 바 애니메이션
     const skills = [
         { name: 'HTML', level: 90, icon: 'fab fa-html5' },
         { name: 'CSS', level: 85, icon: 'fab fa-css3-alt' },
@@ -209,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 프로젝트 상세 정보 모달 업데이트
+    // 프로젝트 상세 정보 모달
     const projectDetails = {
         portfolio: {
             title: '포트폴리오 웹사이트',
@@ -309,26 +209,55 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    window.addEventListener('scroll', () => {
+
+    // 스크롤 이벤트 최적화
+    const handleScroll = debounce(() => {
         if (window.pageYOffset > 300) {
             scrollToTopBtn.style.display = 'block';
         } else {
             scrollToTopBtn.style.display = 'none';
         }
-    });
+    }, 200);
 
-    function initializeFeatures() {
-        if (typeof Swiper !== 'undefined') {
-            // Swiper 초기화 (이미 위에서 수행됨)
-        }
-        if (typeof gsap !== 'undefined') {
-            // GSAP 관련 기능 초기화 (이미 위에서 수행됨)
-        }
-        // 기타 기능 초기화
+    window.addEventListener('scroll', handleScroll);
+
+    // 이미지 지연 로딩
+    const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+    if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+        });
     }
 
-    // 페이지 로드 후 일정 시간 뒤에 기능 초기화
-    window.addEventListener('load', function() {
-        setTimeout(initializeFeatures, 1000);
+    // 성능 최적화: 디바운스 함수
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // 접근성: 키보드 네비게이션 개선
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && projectDetailsModal.style.display === 'flex') {
+            closeModal();
+        }
     });
 });
