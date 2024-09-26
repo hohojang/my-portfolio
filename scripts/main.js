@@ -305,17 +305,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // 스크롤 투 탑 버튼
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+    window.addEventListener('scroll', throttle(() => {
+        if (window.scrollY > 300) {
             scrollToTopBtn.style.display = 'block';
         } else {
             scrollToTopBtn.style.display = 'none';
         }
+    }, 200));
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // throttle 함수 정의
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
 
     function initializeFeatures() {
         if (typeof Swiper !== 'undefined') {
@@ -331,4 +345,36 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         setTimeout(initializeFeatures, 1000);
     });
+
+    // 모바일 메뉴 토글 기능
+    function setupMobileMenu() {
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        const menuToggle = document.createElement('button');
+        menuToggle.textContent = '☰';
+        menuToggle.classList.add('menu-toggle');
+        menuToggle.style.display = 'none';
+
+        header.insertBefore(menuToggle, nav);
+
+        menuToggle.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+        });
+
+        function checkScreenSize() {
+            if (window.innerWidth <= 768) {
+                menuToggle.style.display = 'block';
+                nav.style.display = 'none';
+            } else {
+                menuToggle.style.display = 'none';
+                nav.style.display = 'block';
+            }
+        }
+
+        window.addEventListener('resize', checkScreenSize);
+        checkScreenSize();
+    }
+
+    // 새로운 기능 초기화
+    setupMobileMenu();
 });
