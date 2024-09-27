@@ -1,36 +1,29 @@
 :root {
-  --book-color: #f0e6d2;
+  --book-color: #f0e68c;
+  --page-color: #fffaf0;
   --text-color: #333;
-  --page-color: #fff;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
 body {
   font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
-  padding: 10px;
-  box-sizing: border-box;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  background-color: #f0f0f0;
+  overflow: hidden;
 }
 
-body.loaded {
-  opacity: 1;
-}
-
-.book {
-  width: 100%;
-  height: 80vh;
-  max-width: 800px;
+#book {
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  max-height: 800px;
   position: relative;
   perspective: 1500px;
-  transform-style: preserve-3d;
-  margin: 0 auto;
 }
 
 .page {
@@ -41,16 +34,24 @@ body.loaded {
   left: 0;
   background-color: var(--page-color);
   transform-origin: left center;
-  transition: transform 0.5s;
-  padding: 15px;
+  transition: transform 0.5s, opacity 0.5s;
+  padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0 0 20px var(--shadow-color);
   overflow-y: auto;
+  box-shadow: 0 0 20px var(--shadow-color);
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden; /* Safari */
 }
 
-.page.cover, .page.back-cover {
+.page-content {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.page.active .page-content {
+  opacity: 1;
+}
+
+.cover, .back-cover {
   background-color: var(--book-color);
   display: flex;
   flex-direction: column;
@@ -59,9 +60,8 @@ body.loaded {
   text-align: center;
 }
 
-.page h1, .page h2 {
+h1, h2 {
   color: var(--text-color);
-  margin-bottom: 20px;
 }
 
 .profile-photo {
@@ -69,49 +69,13 @@ body.loaded {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  display: block;
 }
 
 #typing-container {
   height: 100px;
   overflow: hidden;
-}
-
-.bubble {
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  display: inline-block;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.controls {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 20px;
-}
-
-.controls button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.page-curl {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 100px 100px;
-  border-color: transparent transparent var(--shadow-color) transparent;
-  bottom: 0;
-  right: 0;
-  transition: all 0.3s ease-in-out;
 }
 
 .skills-container {
@@ -121,9 +85,11 @@ body.loaded {
 }
 
 .skill {
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 5px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  text-align: center;
 }
 
 .skill-bar {
@@ -131,113 +97,123 @@ body.loaded {
   background-color: #ddd;
   border-radius: 5px;
   overflow: hidden;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .skill-level {
   height: 100%;
   background-color: #4CAF50;
   width: 0;
-  transition: width 1s ease-in-out;
+  transition: width 1s;
 }
 
-.education-section {
-  margin-bottom: 20px;
+.project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.project {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s, transform 0.5s;
 }
 
-.education-section.visible {
+.project.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.project-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-.project {
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+.project-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.project-details.expanded {
+  max-height: 1000px;
+}
+
+.project-toggle {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
 }
 
 .contact-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 18px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
-  body {
-    padding: 5px;
-  }
-
-  .book {
-    width: 95vw;
-    height: 85vh;
-  }
-
-  .page {
-    padding: 10px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 20px;
+  #book {
+      width: 95vw;
+      height: 95vh;
   }
 
   .profile-photo {
-    width: 120px;
-    height: 120px;
-  }
-
-  .controls {
-    bottom: 10px;
-  }
-
-  .controls button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .book {
-    width: 98vw;
-    height: 90vh;
-  }
-
-  .page {
-    padding: 8px;
+      width: 100px;
+      height: 100px;
   }
 
   h1 {
-    font-size: 20px;
+      font-size: 24px;
   }
 
   h2 {
-    font-size: 18px;
+      font-size: 20px;
   }
 
-  .profile-photo {
-    width: 100px;
-    height: 100px;
+  .project {
+      padding: 15px;
+  }
+
+  button {
+      padding: 8px 16px;
+      font-size: 14px;
   }
 
   .skills-container {
-    grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
