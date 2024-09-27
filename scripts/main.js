@@ -162,80 +162,46 @@ document.addEventListener('DOMContentLoaded', function() {
                             typeText();
                         }
                     });
-                }, 1500);
+                }, 2000);
             }
         });
     }
 
-    typeText();
+    if (typeof gsap !== 'undefined' && gsap.registerPlugin) {
+        gsap.registerPlugin(TextPlugin);
+        typeText();
+    } else {
+        console.error('GSAP or TextPlugin is not loaded');
+        typingText.textContent = textArray[0];
+    }
 
-    // 스킬 바 애니메이션 (Font Awesome 아이콘 사용)
-    const skills = [
-        { name: 'HTML', level: 90, icon: 'fab fa-html5' },
-        { name: 'CSS', level: 85, icon: 'fab fa-css3-alt' },
-        { name: 'JavaScript', level: 80, icon: 'fab fa-js' },
-        { name: 'React', level: 75, icon: 'fab fa-react' },
-        { name: 'Node.js', level: 70, icon: 'fab fa-node-js' },
-        { name: 'Python', level: 85, icon: 'fab fa-python' },
-    ];
-
-    const skillsContainer = document.querySelector('.skills-container');
-
-    skills.forEach(skill => {
-        const skillElement = document.createElement('div');
-        skillElement.classList.add('skill');
-        skillElement.innerHTML = `
-            <i class="${skill.icon}"></i>
-            <p>${skill.name}</p>
-            <div class="skill-bar">
-                <div class="skill-progress" style="width: 0%"></div>
-            </div>
-            <p class="skill-level">0%</p>
-        `;
-        skillsContainer.appendChild(skillElement);
-
-        const skillProgress = skillElement.querySelector('.skill-progress');
-        const skillLevelText = skillElement.querySelector('.skill-level');
-
-        gsap.to(skillProgress, {
-            width: `${skill.level}%`,
-            duration: 1.5,
-            ease: 'power2.out',
-            delay: 0.5,
-            onUpdate: function() {
-                const progress = Math.round(this.progress() * skill.level);
-                skillLevelText.textContent = `${progress}%`;
-            }
-        });
-    });
-
-    // 프로젝트 상세 정보 모달 업데이트
+    // 프로젝트 상세 정보
     const projectDetails = {
         portfolio: {
             title: '포트폴리오 웹사이트',
-            description: '개인 포트폴리오를 위한 반응형 웹사이트',
+            description: '개인 포트폴리오를 위한 반응형 웹사이트입니다.',
             features: [
                 '반응형 디자인',
-                '인터랙티브 요소',
-                'CSS 애니메이션',
-                'JavaScript를 이용한 동적 콘텐츠'
+                '동적 컨텐츠 로딩',
+                '스무스 스크롤링',
+                '프로젝트 갤러리'
             ],
-            technologies: ['HTML', 'CSS', 'JavaScript', 'Swiper.js']
+            technologies: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'Swiper.js']
         },
         chatbot: {
             title: 'AI 챗봇 프로젝트',
-            description: '자연어 처리를 이용한 지능형 챗봇 시스템',
+            description: '자연어 처리를 이용한 고객 서비스 챗봇입니다.',
             features: [
-                '자연어 처리 알고리즘',
-                '실시간 대화 기능',
+                '자연어 이해 및 생성',
                 '다국어 지원',
-                '사용자 맞춤형 응답'
+                '24/7 고객 지원',
+                '맞춤형 응답 생성'
             ],
             technologies: ['Python', 'TensorFlow', 'NLP', 'Flask']
         },
         smarthome: {
             title: 'IoT 스마트홈 시스템',
-            description: '사물인터넷 기술을 활용한 스마트홈 제어 시스템',
+            description: '가정 내 기기들을 연결하고 제어하는 IoT 시스템입니다.',
             features: [
                 '원격 기기 제어',
                 '에너지 사용량 모니터링',
@@ -266,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.style.overflow = 'hidden';
             }
         } catch (error) {
-            console.error('Error in function:', error);
+            console.error('Error in openModal function:', error);
         }
     }
 
@@ -275,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
             projectDetailsModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         } catch (error) {
-            console.error('Error in function:', error);
+            console.error('Error in closeModal function:', error);
         }
     }
 
@@ -345,36 +311,4 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         setTimeout(initializeFeatures, 1000);
     });
-
-    // 모바일 메뉴 토글 기능
-    function setupMobileMenu() {
-        const header = document.querySelector('header');
-        const nav = document.querySelector('nav');
-        const menuToggle = document.createElement('button');
-        menuToggle.textContent = '☰';
-        menuToggle.classList.add('menu-toggle');
-        menuToggle.style.display = 'none';
-
-        header.insertBefore(menuToggle, nav);
-
-        menuToggle.addEventListener('click', () => {
-            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
-        });
-
-        function checkScreenSize() {
-            if (window.innerWidth <= 768) {
-                menuToggle.style.display = 'block';
-                nav.style.display = 'none';
-            } else {
-                menuToggle.style.display = 'none';
-                nav.style.display = 'block';
-            }
-        }
-
-        window.addEventListener('resize', checkScreenSize);
-        checkScreenSize();
-    }
-
-    // 새로운 기능 초기화
-    setupMobileMenu();
 });
