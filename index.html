@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jangho Park's Portfolio</title>
     
     <!-- CSS 파일 및 폰트 링크 -->
@@ -26,120 +26,43 @@
     <meta property="og:image:height" content="630">
     <meta name="description" content="박장호 포트폴리오 [PJH's Portfolio]">
     <link rel="image_src" href="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/portfolio-preview.png">
-    
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        nav ul li a {
-            color: #000000 !important; /* 진한 검정색으로 변경 */
-            font-weight: bold;
-        }
-    </style>
 </head>
-<body>
-    <header class="gradient-bg">
-        <h1>Jangho Park's Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education & Certifications</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <button id="menuToggle" class="menu-toggle">☰</button>
-    </header>
-
-    <main>
-        <!-- About 섹션 -->
-        <section id="about" class="gradient-bg">
-            <h2 class="section-title">About Me</h2>
-            <div class="profile-container">
-                <img src="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/profile-photo.jpg" alt="Profile Photo" class="profile-photo">
-            </div>
-            <div class="typing-container">
-                <p id="typing-text"></p>
-            </div>
-        </section>
-
-        <!-- Education & Certifications 섹션 -->
-        <section id="education" class="gradient-bg">
-            <h2 class="section-title">Education & Certifications</h2>
-            <div class="education-container">
-                <div class="education-buttons">
-                    <button id="showEducation">Show Education</button>
-                    <button id="showCertifications">Certification and Training Completion</button>
-                    <button id="showMilitaryService">Military Service</button>
+<body class="loading">
+    <div class="book">
+        <div class="page cover">
+            <h1>Jangho Park's Portfolio</h1>
+            <p class="subtitle">Developer</p>
+        </div>
+        <div class="page" id="about">
+            <h2>About Me</h2>
+            <img src="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/profile-photo.jpg" alt="Profile Photo" class="profile-photo">
+            <div id="typing-container"></div>
+            <div id="next-page-bubble" class="bubble">다음 페이지 버튼을 눌러주세요!</div>
+        </div>
+        <div class="page" id="education">
+            <h2>Education & Certifications</h2>
+            <div id="education-content">
+                <div class="education-section" id="education-section">
+                    <h3>Education</h3>
                 </div>
-                <div id="educationContent" class="content-box"></div>
-                <div id="certificationsContent" class="content-box"></div>
-                <div id="militaryServiceContent" class="content-box"></div>
-            </div>
-        </section>
-
-        <!-- Skills 섹션 -->
-        <section id="skills" class="gradient-bg">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
-                <!-- 스킬 요소들은 JavaScript에서 동적으로 생성됩니다 -->
-            </div>
-        </section>
-
-        <!-- Projects 섹션 -->
-        <section id="projects" class="gradient-bg">
-            <h2 class="section-title">Projects</h2>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- 기존 프로젝트 슬라이드 -->
-                    <div class="swiper-slide">
-                        <div class="project">
-                            <h3>포트폴리오 웹사이트</h3>
-                            <div class="project-preview">
-                                <img src="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/portfolio-preview.png" alt="포트폴리오 웹사이트 미리보기">
-                            </div>
-                            <button class="project-details-btn" data-project="portfolio">상세 정보</button>
-                        </div>
-                    </div>
-                    <!-- 새로운 프로젝트 슬라이드 1 -->
-                    <div class="swiper-slide">
-                        <div class="project">
-                            <h3>AI 챗봇 프로젝트</h3>
-                            <div class="project-preview">
-                                <img src="path/to/chatbot-preview.png" alt="AI 챗봇 프로젝트 미리보기">
-                            </div>
-                            <button class="project-details-btn" data-project="chatbot">상세 정보</button>
-                        </div>
-                    </div>
-                    <!-- 새로운 프로젝트 슬라이드 2 -->
-                    <div class="swiper-slide">
-                        <div class="project">
-                            <h3>IoT 스마트홈 시스템</h3>
-                            <div class="project-preview">
-                                <img src="path/to/smarthome-preview.png" alt="IoT 스마트홈 시스템 미리보기">
-                            </div>
-                            <button class="project-details-btn" data-project="smarthome">상세 정보</button>
-                        </div>
-                    </div>
+                <div class="education-section" id="certifications-section">
+                    <h3>Certifications</h3>
                 </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            <div class="project-details-modal">
-                <div class="modal-content">
-                    <span class="close-btn">&times;</span>
-                    <h3 id="modal-title"></h3>
-                    <div class="project-details-content"></div>
+                <div class="education-section" id="militaryService-section">
+                    <h3>Military Service</h3>
                 </div>
             </div>
-        </section>
-
-        <!-- Contact 섹션 -->
-        <section id="contact" class="gradient-bg">
-            <h2 class="section-title">Contact Information</h2>
+        </div>
+        <div class="page" id="skills">
+            <h2>Skills</h2>
+            <div class="skills-container"></div>
+        </div>
+        <div class="page" id="projects">
+            <h2>Projects</h2>
+            <div class="project-container"></div>
+        </div>
+        <div class="page" id="contact">
+            <h2>Contact Information</h2>
             <div class="contact-info">
                 <a href="mailto:yuunnyso123@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i> Email
@@ -151,15 +74,16 @@
                     <i class="fab fa-github"></i> GitHub
                 </a>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Jangho Park. All rights reserved.</p>
-    </footer>
-
-    <!-- 스크롤 투 탑 버튼 -->
-    <button id="scrollToTopBtn" class="scroll-to-top" style="display: none;">↑</button>
+        </div>
+        <div class="page back-cover">
+            <p>&copy; 2024 Jangho Park. All rights reserved.</p>
+        </div>
+    </div>
+    <div class="page-curl"></div>
+    <div class="controls">
+        <button id="prevBtn">이전</button>
+        <button id="nextBtn">다음</button>
+    </div>
 
     <!-- JavaScript 파일 -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
