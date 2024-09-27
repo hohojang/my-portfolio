@@ -14,7 +14,14 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #1a1a1a;
-  background-image: url('../images/leather-texture.png');
+  /* background-image: url('../images/leather-texture.png'); 를 제거하고 다음 중 하나로 대체 */
+  
+  /* 단색 배경 */
+  background-color: #1a1a1a;
+  
+  /* 또는 그라데이션 배경 */
+  background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+  
   color: var(--text-color);
   overflow: hidden;
 }
@@ -42,13 +49,21 @@ body {
   left: 0;
   background-color: var(--page-color);
   transform-origin: left center;
-  transition: transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
   box-shadow: 0 0 10px var(--shadow-color);
   backface-visibility: hidden;
   border: 2px solid var(--text-color);
+  opacity: 1; /* 1로 설정하여 모든 페이지가 보이게 함 */
+  pointer-events: none; /* 숨겨진 페이지와의 상호작용 방지 */
+}
+
+.page.active {
+  opacity: 1; /* 활성 페이지만 보이게 함 */
+  pointer-events: auto; /* 활성 페이지와의 상호작용 허용 */
+  z-index: 1; /* 활성 페이지를 최상위로 */
 }
 
 .page-content {
