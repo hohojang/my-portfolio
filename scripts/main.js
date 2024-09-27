@@ -1,92 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jangho Park's Portfolio</title>
-    
-    <!-- CSS 파일 및 폰트 링크 -->
-    <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-    <!-- JavaScript 라이브러리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
-    
-    <!-- 카카오톡 링크 미리보기 메타 태그 -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hohojang.github.io/my-portfolio/">
-    <meta property="og:title" content="박장호 포트폴리오 [PJH's Portfolio]">
-    <meta property="og:description" content="박장호의 개발자 포트폴리오 웹사이트입니다.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/portfolio-preview.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="description" content="박장호 포트폴리오 [PJH's Portfolio]">
-    <link rel="image_src" href="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/portfolio-preview.png">
-</head>
-<body class="loading">
-    <div class="book">
-        <div class="page cover">
-            <h1>Jangho Park's Portfolio</h1>
-            <p class="subtitle">Developer</p>
-        </div>
-        <div class="page" id="about">
-            <h2>About Me</h2>
-            <img src="https://raw.githubusercontent.com/hohojang/my-portfolio/main/images/profile-photo.jpg" alt="Profile Photo" class="profile-photo">
-            <div id="typing-container"></div>
-            <div id="next-page-bubble" class="bubble">다음 페이지 버튼을 눌러주세요!</div>
-        </div>
-        <div class="page" id="education">
-            <h2>Education & Certifications</h2>
-            <div id="education-content">
-                <div class="education-section" id="education-section">
-                    <h3>Education</h3>
-                </div>
-                <div class="education-section" id="certifications-section">
-                    <h3>Certifications</h3>
-                </div>
-                <div class="education-section" id="militaryService-section">
-                    <h3>Military Service</h3>
-                </div>
-            </div>
-        </div>
-        <div class="page" id="skills">
-            <h2>Skills</h2>
-            <div class="skills-container"></div>
-        </div>
-        <div class="page" id="projects">
-            <h2>Projects</h2>
-            <div class="project-container"></div>
-        </div>
-        <div class="page" id="contact">
-            <h2>Contact Information</h2>
-            <div class="contact-info">
-                <a href="mailto:yuunnyso123@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i> 010-6503-5245
-                </div>
-                <a href="https://github.com/hohojang/my-portfolio" target="_blank" class="contact-item">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-            </div>
-        </div>
-        <div class="page back-cover">
-            <p>&copy; 2024 Jangho Park. All rights reserved.</p>
-        </div>
-    </div>
-    <div class="page-curl"></div>
-    <div class="controls">
-        <button id="prevBtn">이전</button>
-        <button id="nextBtn">다음</button>
-    </div>
+document.addEventListener('DOMContentLoaded', function() {
+    const book = document.getElementById('book');
+    const pages = document.querySelectorAll('.page');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentPage = 0;
 
-    <!-- JavaScript 파일 -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="scripts/main.js"></script>
-</body>
-</html>
+    function showPage(index) {
+        pages.forEach((page, i) => {
+            if (i === index) {
+                page.style.transform = 'rotateY(0deg)';
+                page.style.zIndex = pages.length - i;
+                page.classList.add('active');
+                if (page.id === 'projects') {
+                    loadProjects();
+                } else if (page.id === 'skills') {
+                    loadSkills();
+                } else if (page.id === 'education') {
+                    loadEducation();
+                }
+            } else if (i < index) {
+                page.style.transform = 'rotateY(-180deg)';
+                page.style.zIndex = i;
+                page.classList.remove('active');
+            } else {
+                page.style.transform = 'rotateY(0deg)';
+                page.style.zIndex = pages.length - i;
+                page.classList.remove('active');
+            }
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < pages.length - 1) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+
+    // 타이핑 효과
+    const typingContainer = document.getElementById('typing-container');
+    const textArray = [
+        "안녕하세요! 제 이름은 박장호입니다.",
+        "의사소통 능력이 뛰어난 신입 개발자입니다.",
+        "항상 배우려는 자세로 끊임없이 성장합니다.",
+        "저의 가능성을 알아봐 주실 회사를 찾고 있습니다.",
+        "함께 발전해 나갈 수 있는 기회를 주세요!",
+        "아래에서 제 연락처를 확인해 주세요!"
+    ];
+
+    let textIndex = 0;
+    let charIndex = 0;
+
+    function typeText() {
+        if (textIndex < textArray.length) {
+            if (charIndex < textArray[textIndex].length) {
+                typingContainer.innerHTML += textArray[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 50);
+            } else {
+                setTimeout(() => {
+                    textIndex++;
+                    charIndex = 0;
+                    typingContainer.innerHTML = '';
+                    typeText();
+                }, 2000);
+            }
+        } else {
+            textIndex = 0;
+            typeText();
+        }
+    }
+
+    typeText();
+
+    // 프로젝트 로딩 함수
+    function loadProjects() {
+        const projectsContainer = document.querySelector('.project-container');
+        if (projectsContainer.children.length > 0) return;
+
+        const projects = [
+            {
+                title: '포트폴리오 웹사이트',
+                image: 'images/portfolio-preview.png',
+                description: '개인 포트폴리오를 위한 반응형 웹사이트입니다.',
+                details: '이 프로젝트는 HTML, CSS, JavaScript를 사용하여 제작되었으며, 책 넘기기 효과와 다양한 애니메이션을 포함하고 있습니다.'
+            },
+            // 다른 프로젝트 추가
+        ];
+
+        projects.forEach((project, index) => {
+            const projectElement = document.createElement('div');
+            projectElement.classList.add('project');
+            projectElement.innerHTML = `
+                <h3>${project.title}</h3>
+                <img src="${project.image}" alt="${project.title}" class="project-image">
+                <p>${project.description}</p>
+                <div class="project-details">${project.details}</div>
+                <button class="project-toggle">자세히 보기</button>
+            `;
+            projectsContainer.appendChild(projectElement);
+
+            setTimeout(() => {
+                projectElement.classList.add('visible');
+            }, index * 200);
+
+            const toggleBtn = projectElement.querySelector('.project-toggle');
+            const details = projectElement.querySelector('.project-details');
+            toggleBtn.addEventListener('click', () => {
+                details.classList.toggle('expanded');
+                toggleBtn.textContent = details.classList.contains('expanded') ? '접기' : '자세히 보기';
+            });
+        });
+    }
+
+    // 스킬 로딩 함수
+    function loadSkills() {
+        const skillsContainer = document.querySelector('.skills-container');
+        if (skillsContainer.children.length > 0) return;
+
+        const skills = [
+            { name: 'HTML', level: 90 },
+            { name: 'CSS', level: 85 },
+            { name: 'JavaScript', level: 80 },
+            { name: 'React', level: 75 },
+            { name: 'Node.js', level: 70 },
+            { name: 'Python', level: 85 },
+            { name: 'SQL', level: 80 },
+            { name: 'Git', level: 75 }
+        ];
+
+        skills.forEach((skill, index) => {
+            const skillElement = document.createElement('div');
+            skillElement.classList.add('skill');
+            skillElement.innerHTML = `
+                <h3>${skill.name}</h3>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 0%"></div>
+                </div>
+            `;
+            skillsContainer.appendChild(skillElement);
+
+            setTimeout(() => {
+                skillElement.querySelector('.skill-level').style.width = `${skill.level}%`;
+            }, index * 100);
+        });
+    }
+
+    // Education 로딩 함수
+    function loadEducation() {
+        const educationContent = document.getElementById('education-content');
+        if (educationContent.children.length > 0) return;
+
+        const educationData = [
+            {
+                title: 'Education',
+                items: [
+                    '목원대학교 지능로봇공학과 졸업 (2018년 03월 - 2024년 02월)',
+                    '대전지족고등학교 졸업 (2014년 - 2017년)'
+                ]
+            },
+            {
+                title: 'Certifications',
+                items: [
+                    'IOT지식능력검정자격증 (2023년 12월 08일)',
+                    '자동차운전면허증 2종 보통 (2017년 12월 22일)'
+                ]
+            },
+            {
+                title: 'Training Completion',
+                items: [
+                    'DSC공유대학 Amazon DeepRacer 자율주행교육 (2023년 11월 24일 ~ 2023년 11월 24일)',
+                    '(주)새온 생산파트 인턴십 (2022년 11월 ~ 2023년 02월)'
+                ]
+            },
+            {
+                title: 'Military Service',
+                items: [
+                    '복무기간: 2018년 3월 18일 ~ 2020년 10월 20일',
+                    '군별: 해병대',
+                    '계급: 병장',
+                    '병과: 상륙군운용통신'
+                ]
+            }
+        ];
+
+        educationData.forEach((section, index) => {
+            const sectionElement = document.createElement('div');
+            sectionElement.classList.add('education-section');
+            sectionElement.innerHTML = `
+                <h3>${section.title}</h3>
+                <ul>
+                    ${section.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+            educationContent.appendChild(sectionElement);
+
+            setTimeout(() => {
+                sectionElement.style.opacity = '1';
+                sectionElement.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    }
+
+    // 초기 페이지 표시
+    showPage(currentPage);
+});
