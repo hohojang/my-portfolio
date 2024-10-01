@@ -263,3 +263,8 @@ nextBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', function() {
     showPage(0);
 });
+
+function updateNavigationButtons() {
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage === pages.length - 1;
+}
