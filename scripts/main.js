@@ -260,7 +260,7 @@ function loadProjects() {
                         <li>데이터 전처리부터 시각화까지 전체 데이터 분석 파이프라인 구축 경험</li>
                     </ul>
                     <p>이 프로젝트는 데이터 시각화의 중요성과 그 잠재력을 깊이 이해하는 계기가 되었으며, 향후 데이터 기반 의사결정에 큰 도움이 될 것입니다.</p>
-                    <a href="./pdfs/data_visualization_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                         <a href="./documents/ml_data_visualization_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
                 `
             }
         ];
