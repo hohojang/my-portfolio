@@ -393,3 +393,29 @@ button {
   color: var(--text-color);
   text-decoration: underline;
 }
+
+.project-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.project-navigation button {
+    padding: 10px 20px;
+    background-color: var(--text-color);
+    color: var(--book-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.project-navigation button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.project {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s, transform 0.5s;
+}

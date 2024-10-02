@@ -175,8 +175,13 @@ function loadSkills() {
     }
 }
 
+let currentProjectIndex = 0;
+
 function loadProjects() {
     const projectsContainer = document.querySelector('.project-container');
+    const prevProjectBtn = document.getElementById('prevProject');
+    const nextProjectBtn = document.getElementById('nextProject');
+    
     if (projectsContainer && projectsContainer.children.length === 0) {
         const projects = [
             {
@@ -216,52 +221,94 @@ function loadProjects() {
                 `
             },
             {
-                title: '머신러닝 데이터 시각화 프로젝트',
-                image: './images/pro2.png',  // PNG 파일 확장자로 수정
-                description: '머신러닝 모델의 결과를 시각화하여 데이터 인사이트를 효과적으로 전달하는 프로젝트입니다.',
+                title: '데이터 시각화 프로젝트',
+                image: './images/pro2.png',
+                description: 'Python의 데이터 시각화 라이브러리를 활용하여 복잡한 데이터셋을 분석하고 시각화한 프로젝트입니다.',
                 details: `
                     <h4>주요 기능:</h4>
                     <ul>
-                        <li>다양한 머신러닝 알고리즘 결과 시각화</li>
-                        <li>인터랙티브 데이터 탐색 도구</li>
-                        <li>실시간 데이터 업데이트 및 시각화</li>
+                        <li>Seaborn과 Matplotlib을 사용한 고급 통계 그래프 생성</li>
+                        <li>다양한 데이터셋에 대한 상관관계 분석 및 시각화</li>
+                        <li>Pandas를 활용한 대규모 데이터 전처리 및 분석</li>
+                        <li>동적이고 인터랙티브한 데이터 시각화 구현</li>
+                        <li>다양한 차트 유형(히트맵, 산점도, 박스플롯 등) 구현</li>
                     </ul>
-                    <h4>사용 기술:</h4>
+
+                    <h4>개발 과정에서의 도전과 해결:</h4>
+                    <ol>
+                        <li>
+                            <strong>도전:</strong> 대용량 데이터셋 처리 시 성능 문제<br>
+                            <strong>해결:</strong> Pandas의 효율적인 데이터 처리 기능과 NumPy의 벡터화 연산을 활용하여 처리 속도 개선
+                        </li>
+                        <li>
+                            <strong>도전:</strong> 복잡한 다변량 데이터의 효과적인 시각화<br>
+                            <strong>해결:</strong> Seaborn의 고급 통계 그래프 기능을 활용하여 다차원 데이터를 2D로 효과적으로 표현
+                        </li>
+                        <li>
+                            <strong>도전:</strong> 일관된 스타일의 차트 디자인 유지<br>
+                            <strong>해결:</strong> Matplotlib의 스타일 시트와 사용자 정의 함수를 생성하여 일관된 디자인 적용
+                        </li>
+                    </ol>
+
+                    <h4>학습 및 성장:</h4>
+                    <p>이 프로젝트를 통해 다음과 같은 중요한 기술과 개념을 습득하였습니다:</p>
                     <ul>
-                        <li>Python (scikit-learn, pandas)</li>
-                        <li>D3.js for 데이터 시각화</li>
-                        <li>Flask for 백엔드 API</li>
+                        <li>데이터 시각화의 다양한 기법과 최적의 차트 유형 선택 방법</li>
+                        <li>대규모 데이터셋의 효율적인 처리 및 분석 기술</li>
+                        <li>시각적 분석을 통한 데이터 인사이트 도출 능력</li>
+                        <li>Python 데이터 과학 생태계의 주요 라이브러리 활용 능력 향상</li>
+                        <li>데이터 전처리부터 시각화까지 전체 데이터 분석 파이프라인 구축 경험</li>
                     </ul>
-                    <p>자세한 내용은 아래 PDF 문서를 참조하세요:</p>
-                    <a href="./pdfs/ml_data_visualization_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                    <p>이 프로젝트는 데이터 시각화의 중요성과 그 잠재력을 깊이 이해하는 계기가 되었으며, 향후 데이터 기반 의사결정에 큰 도움이 될 것입니다.</p>
+                    <a href="./pdfs/data_visualization_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
                 `
-            },
-            // 추가 프로젝트를 여기에 넣으세요
+            }
         ];
 
-        projects.forEach((project, index) => {
-            const projectElement = document.createElement('div');
-            projectElement.classList.add('project');
-            projectElement.innerHTML = `
-                <h3>${project.title}</h3>
-                <img src="${project.image}" alt="${project.title}" class="project-image">
-                <p>${project.description}</p>
-                <div class="project-details">${project.details}</div>
-                <button class="project-toggle">자세히 보기</button>
+        function displayProject(index) {
+            const project = projects[index];
+            projectsContainer.innerHTML = `
+                <div class="project">
+                    <h3>${project.title}</h3>
+                    <img src="${project.image}" alt="${project.title}" class="project-image">
+                    <p>${project.description}</p>
+                    <div class="project-details">${project.details}</div>
+                    <button class="project-toggle">자세히 보기</button>
+                </div>
             `;
-            projectsContainer.appendChild(projectElement);
 
-            setTimeout(() => {
-                projectElement.classList.add('visible');
-            }, index * 200);
-
-            const toggleBtn = projectElement.querySelector('.project-toggle');
-            const details = projectElement.querySelector('.project-details');
+            const toggleBtn = projectsContainer.querySelector('.project-toggle');
+            const details = projectsContainer.querySelector('.project-details');
             toggleBtn.addEventListener('click', () => {
                 details.classList.toggle('expanded');
                 toggleBtn.textContent = details.classList.contains('expanded') ? '접기' : '자세히 보기';
             });
+        }
+
+        function updateProjectNavigation() {
+            prevProjectBtn.disabled = currentProjectIndex === 0;
+            nextProjectBtn.disabled = currentProjectIndex === projects.length - 1;
+        }
+
+        prevProjectBtn.addEventListener('click', () => {
+            if (currentProjectIndex > 0) {
+                currentProjectIndex--;
+                displayProject(currentProjectIndex);
+                updateProjectNavigation();
+            }
         });
+
+        nextProjectBtn.addEventListener('click', () => {
+            if (currentProjectIndex < projects.length - 1) {
+                currentProjectIndex++;
+                displayProject(currentProjectIndex);
+                updateProjectNavigation();
+            }
+        });
+
+        // 초기 프로젝트 표시
+        displayProject(currentProjectIndex);
+        updateProjectNavigation();
     }
 }
 
