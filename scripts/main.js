@@ -254,6 +254,51 @@ function loadProjects() {
 
                     <a href="./documents/ml_data_visualization_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
                 `
+            },
+            {
+                title: '지능형 로봇 시스템 개발 프로젝트',
+                image: './images/pro3-1.png',  // 프로젝트 대표 이미지 경로
+                description: '머신러닝과 컴퓨터 비전을 활용한 지능형 로봇 시스템 개발',
+                details: `
+                    <h3>프로젝트 개요</h3>
+                    <p>이 프로젝트는 사용자 추적, 상품 인식, 장애물 회피 등 다양한 기능을 갖춘 지능형 로봇 시스템을 개발하는 것을 목표로 합니다. 강화학습, 실시간 통신, 센서 데이터 처리 등 첨단 기술을 활용하여 복잡한 환경에서 효과적으로 작동하는 로봇을 구현했습니다.</p>
+
+                    <h3>주요 기능</h3>
+                    <ul>
+                        <li><strong>사용자 트래킹:</strong> OpenCV를 이용한 사용자 인식 및 추적</li>
+                        <li><strong>상품 인식:</strong> 바코드 기반 상품 인식 시스템</li>
+                        <li><strong>추돌 방지:</strong> 적외선 센서를 활용한 장애물 감지 및 충돌 방지</li>
+                        <li><strong>정보 디스플레이:</strong> 상품 정보 및 가격 표시</li>
+                        <li><strong>강화학습 기반 보행:</strong> Open AI와 PyBullet을 활용한 안정적인 보행 구현</li>
+                        <li><strong>실시간 원격 통신:</strong> 로봇 상태 및 영상 데이터의 실시간 송수신</li>
+                        <li><strong>센서 데이터 모니터링:</strong> 로봇 관절 데이터 실시간 측정 및 이상 감지</li>
+                    </ul>
+
+                    <h3>사용 기술</h3>
+                    <ul>
+                        <li><strong>하드웨어:</strong> 라즈베리파이(임베디드 시스템 제어), 아두이노(모터 제어)</li>
+                        <li><strong>컴퓨터 비전:</strong> OpenCV, 라즈베리파이 카메라</li>
+                        <li><strong>머신러닝:</strong> 강화학습 (Open AI, PyBullet)</li>
+                        <li><strong>센서 기술:</strong> 적외선 센서, 바코드 리더</li>
+                        <li><strong>통신:</strong> 실시간 데이터 송수신 프로토콜</li>
+                        <li><strong>모터 제어:</strong> PWM 기술을 이용한 정밀 속도 제어</li>
+                    </ul>
+
+                    <h3>주요 도전 과제 및 해결 방법</h3>
+                    <ul>
+                        <li><strong>불균일한 환경에서의 안정적 보행:</strong> 강화학습 모델을 실제 환경에 적용하여 해결</li>
+                        <li><strong>실시간 데이터 처리:</strong> 효율적인 알고리즘 설계와 하드웨어 최적화를 통해 지연 최소화</li>
+                        <li><strong>다중 센서 데이터 통합:</strong> 센서 퓨전 기술을 활용하여 정확도 향상</li>
+                        <li><strong>전력 관리:</strong> 효율적인 전력 소비를 위한 알고리즘 최적화</li>
+                    </ul>
+
+                    <h3>프로젝트 결과</h3>
+                    <p>개발된 로봇 시스템은 복잡한 실내 환경에서 안정적으로 작동하며, 사용자 추적, 상품 인식, 장애물 회피 등의 기능을 성공적으로 수행합니다. 실시간 원격 모니터링 및 제어 시스템을 통해 효율적인 관리가 가능하며, 강화학습을 통한 보행 능력 향상으로 다양한 지형에서의 안정적인 이동이 가능합니다.</p>
+
+                    <img src="./images/pro3.png" alt="로봇 시스템 데모" style="max-width: 100%; height: auto;">
+
+                    <a href="./documents/intelligent_robot_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                `
             }
         ];
 
