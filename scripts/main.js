@@ -337,15 +337,12 @@ function loadProjects() {
                     <h3>프로젝트 결과 및 의의</h3>
                     <p>개발된 시스템은 실내 공기 질을 효과적으로 모니터링하고 관리할 수 있는 능력을 보여주었습니다. 사용자들은 실시간으로 미세먼지 농도를 확인하고, 필요에 따라 원격으로 창문을 제어할 수 있게 되었습니다. 이 프로젝트를 통해 IoT 기술과 환경 모니터링의 융합 가능성을 탐구하였으며, 실생활에 직접 적용 가능한 솔루션을 개발하는 경험을 쌓았습니다.</p>
 
-                    <h3>프로젝트 데모 영상</h3>
-                    <video width="100%" controls>
-                        <source src="./videos/smart_dust_monitor_demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-
                     <img src="./images/pro4-1.png" alt="미세먼지 모니터링 시스템 데모" style="max-width: 100%; height: auto;">
 
-                    <a href="./documents/smart_dust_monitor_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                    <div class="project-links">
+                        <a href="./documents/smart_dust_monitor_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                        <button class="video-btn" data-video="smart_dust_monitor_demo">데모 비디오 보기</button>
+                    </div>
                 `
             }
         ];
@@ -368,6 +365,15 @@ function loadProjects() {
                 details.classList.toggle('expanded');
                 toggleBtn.textContent = details.classList.contains('expanded') ? '접기' : '자세히 보기';
             });
+
+            // 비디오 버튼에 이벤트 리스너 추가
+            const videoBtn = projectsContainer.querySelector('.video-btn');
+            if (videoBtn) {
+                videoBtn.addEventListener('click', () => {
+                    const videoName = videoBtn.getAttribute('data-video');
+                    openVideoModal(videoName);
+                });
+            }
         }
 
         function updateProjectNavigation() {
@@ -420,4 +426,34 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateNavigationButtons() {
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage === pages.length - 1;
+}
+
+// 비디오 모달 열기 함수
+function openVideoModal(videoName) {
+    const videoUrl = `https://github.com/hohojang/my-portfolio/raw/main/videos/${videoName}.mp4`;
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+        <div class="video-modal-content">
+            <span class="close-modal">&times;</span>
+            <video controls width="100%">
+                <source src="${videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // 모달 닫기 버튼 이벤트 리스너
+    const closeBtn = modal.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+
+    // 모달 외부 클릭 시 닫기
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
 }
