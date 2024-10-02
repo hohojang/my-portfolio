@@ -375,3 +375,47 @@ button {
   align-items: center;
   height: 100%;
 }
+
+.project-pdf-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: var(--text-color);
+  color: var(--book-color);
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.9em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.project-pdf-link:hover {
+  background-color: var(--book-color);
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.project-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.project-navigation button {
+    padding: 10px 20px;
+    background-color: var(--text-color);
+    color: var(--book-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.project-navigation button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.project {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s, transform 0.5s;
+}
