@@ -146,15 +146,23 @@ function loadSkills() {
     const skillsContainer = document.querySelector('.skills-container');
     if (skillsContainer && skillsContainer.children.length === 0) {
         const skills = [
-            { name: 'HTML', level: 90, icon: '<i class="fab fa-html5"></i>' },
-            { name: 'CSS', level: 85, icon: '<i class="fab fa-css3-alt"></i>' },
-            { name: 'JavaScript', level: 80, icon: '<i class="fab fa-js-square"></i>' },
-            { name: 'React', level: 75, icon: '<i class="fab fa-react"></i>' },
-            { name: 'Node.js', level: 70, icon: '<i class="fab fa-node-js"></i>' },
-            { name: 'Python', level: 85, icon: '<i class="fab fa-python"></i>' },
-            { name: 'SQL', level: 80, icon: '<i class="fas fa-database"></i>' },
-            { name: 'Git', level: 75, icon: '<i class="fab fa-git-alt"></i>' }
+            { name: 'Python', level: 90, icon: '<i class="fab fa-python"></i>' },
+            { name: 'Visual C++', level: 85, icon: '<i class="fas fa-code"></i>' },
+            { name: 'C#', level: 80, icon: '<i class="fas fa-code"></i>' },
+            { name: 'JavaScript', level: 85, icon: '<i class="fab fa-js-square"></i>' },
+            { name: 'C', level: 75, icon: '<i class="fas fa-code"></i>' },
+            { name: 'Arduino', level: 70, icon: '<i class="fas fa-microchip"></i>' },
+            { name: 'MATLAB', level: 65, icon: '<i class="fas fa-calculator"></i>' },
+            { name: 'CSS', level: 80, icon: '<i class="fab fa-css3-alt"></i>' },
+            { name: 'HTML5', level: 85, icon: '<i class="fab fa-html5"></i>' },
+            { name: 'VSCode', level: 90, icon: '<i class="fas fa-code"></i>' },
+            { name: 'Pandas', level: 75, icon: '<i class="fas fa-table"></i>' },
+            { name: 'Matplotlib', level: 70, icon: '<i class="fas fa-chart-bar"></i>' },
+            { name: 'NumPy', level: 80, icon: '<i class="fas fa-calculator"></i>' }
         ];
+
+        // 숙련도(level) 기준으로 내림차순 정렬
+        skills.sort((a, b) => b.level - a.level);
 
         skills.forEach((skill, index) => {
             const skillElement = document.createElement('div');
@@ -162,14 +170,20 @@ function loadSkills() {
             skillElement.innerHTML = `
                 <div class="skill-icon">${skill.icon}</div>
                 <h3>${skill.name}</h3>
-                <div class="skill-bar">
-                    <div class="skill-level" style="width: 0%"></div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 0%"></div>
+                    </div>
+                    <span class="skill-percent">0%</span>
                 </div>
             `;
             skillsContainer.appendChild(skillElement);
 
             setTimeout(() => {
-                skillElement.querySelector('.skill-level').style.width = `${skill.level}%`;
+                const skillLevel = skillElement.querySelector('.skill-level');
+                const skillPercent = skillElement.querySelector('.skill-percent');
+                skillLevel.style.width = `${skill.level}%`;
+                skillPercent.textContent = `${skill.level}%`;
             }, index * 100);
         });
     }
