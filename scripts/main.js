@@ -299,6 +299,54 @@ function loadProjects() {
 
                     <a href="./documents/intelligent_robot_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
                 `
+            },
+            {
+                title: '스마트 미세먼지 모니터링 및 제어 시스템',
+                image: './images/pro4.png',  // 프로젝트 대표 이미지 경로
+                description: '아두이노와 앱인벤터를 활용한 자동 미세먼지 감지 및 창문 제어 시스템',
+                details: `
+                    <h3>프로젝트 개요</h3>
+                    <p>이 프로젝트는 실내 공기 질을 자동으로 모니터링하고 관리하는 스마트 시스템을 개발하는 것을 목표로 합니다. 미세먼지 농도에 따라 자동으로 창문을 제어하고, 사용자에게 실시간으로 정보를 제공하며, 원격 제어 기능을 갖춘 종합적인 솔루션을 구현했습니다.</p>
+
+                    <h3>주요 기능</h3>
+                    <ul>
+                        <li><strong>미세먼지 농도 측정:</strong> 전용 센서를 통한 실시간 미세먼지 농도 모니터링</li>
+                        <li><strong>시각적 알림:</strong> 3색 LED를 통한 미세먼지 심각도 표시 (예: 녹색-양호, 황색-주의, 적색-위험)</li>
+                        <li><strong>자동 창문 제어:</strong> 서보 모터를 이용한 미세먼지 농도 기반 자동 창문 개폐</li>
+                        <li><strong>원격 제어:</strong> 블루투스 모듈(HC-06)을 통한 스마트폰 앱 연동 및 원격 제어</li>
+                        <li><strong>정보 디스플레이:</strong> LCD 화면을 통한 실시간 미세먼지 농도 및 대기 오염 정도 표시</li>
+                    </ul>
+
+                    <h3>사용 기술</h3>
+                    <ul>
+                        <li><strong>하드웨어:</strong> 아두이노, 미세먼지 감지 센서, 서보 모터, 3색 LED, LCD 디스플레이, HC-06 블루투스 모듈</li>
+                        <li><strong>소프트웨어:</strong> 아두이노 IDE, MIT App Inventor</li>
+                        <li><strong>통신:</strong> 블루투스 프로토콜</li>
+                        <li><strong>데이터 처리:</strong> 실시간 센서 데이터 분석 및 의사결정 알고리즘</li>
+                    </ul>
+
+                    <h3>구현 과정 및 도전 과제</h3>
+                    <ol>
+                        <li><strong>센서 캘리브레이션:</strong> 정확한 미세먼지 농도 측정을 위한 센서 보정 작업 수행</li>
+                        <li><strong>모터 제어 최적화:</strong> 부드럽고 정확한 창문 개폐를 위한 서보 모터 제어 알고리즘 개발</li>
+                        <li><strong>전력 소비 최적화:</strong> 배터리 수명 연장을 위한 저전력 모드 구현</li>
+                        <li><strong>사용자 인터페이스 설계:</strong> 직관적이고 사용하기 쉬운 모바일 앱 인터페이스 개발</li>
+                        <li><strong>안정적인 무선 통신:</strong> 블루투스 연결의 안정성 확보 및 통신 프로토콜 최적화</li>
+                    </ol>
+
+                    <h3>프로젝트 결과 및 의의</h3>
+                    <p>개발된 시스템은 실내 공기 질을 효과적으로 모니터링하고 관리할 수 있는 능력을 보여주었습니다. 사용자들은 실시간으로 미세먼지 농도를 확인하고, 필요에 따라 원격으로 창문을 제어할 수 있게 되었습니다. 이 프로젝트를 통해 IoT 기술과 환경 모니터링의 융합 가능성을 탐구하였으며, 실생활에 직접 적용 가능한 솔루션을 개발하는 경험을 쌓았습니다.</p>
+
+                    <h3>프로젝트 데모 영상</h3>
+                    <video width="100%" controls>
+                        <source src="./videos/smart_dust_monitor_demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <img src="./images/pro4-1.png" alt="미세먼지 모니터링 시스템 데모" style="max-width: 100%; height: auto;">
+
+                    <a href="./documents/smart_dust_monitor_project.pdf" target="_blank" class="project-pdf-link">프로젝트 상세 보고서 (PDF)</a>
+                `
             }
         ];
 
