@@ -102,7 +102,7 @@ function loadEducation() {
                 title: 'Certifications',
                 items: [
                     'IOT지식능력검정자격증 (2023년 12월 08일)',
-                    '자동차운전면허증 2종 보통 (2017년 12월 22일)'
+                    '자동차운전면허증 1종 보통 (2017년 12월 22일)'
                 ]
             },
             {
