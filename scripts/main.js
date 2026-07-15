@@ -419,14 +419,14 @@ function loadProjects() {
                 toggleBtn.textContent = details.classList.contains('expanded') ? '접기' : '자세히 보기';
             });
 
-            // 비디오 버튼에 이벤트 리스너 추가
-            const videoBtn = projectsContainer.querySelector('.video-btn');
-            if (videoBtn) {
+            // 비디오 버튼들에 이벤트 리스너 추가
+            const videoBtns = projectsContainer.querySelectorAll('.video-btn');
+            videoBtns.forEach((videoBtn) => {
                 videoBtn.addEventListener('click', () => {
                     const videoName = videoBtn.getAttribute('data-video');
                     openVideoModal(videoName);
                 });
-            }
+            });
         }
 
         function updateProjectNavigation() {
@@ -483,7 +483,7 @@ function updateNavigationButtons() {
 
 // 비디오 모달 열기 함수
 function openVideoModal(videoName) {
-    const videoUrl = `https://github.com/hohojang/my-portfolio/raw/main/videos/${videoName}.mp4`;
+    const videoUrl = `./videos/${videoName}.mp4`;
     const modal = document.createElement('div');
     modal.className = 'video-modal';
     modal.innerHTML = `
