@@ -390,7 +390,8 @@ function loadProjects() {
                     <h3>학습 및 성장</h3>
                     <p>이 프로젝트는 임베디드 소프트웨어 현업에서 처음으로 진행한 프로젝트였고, 문제 발생 지점을 스스로 점검하는 능력을 키울 수 있었습니다. 멀티미터와 오실로스코프를 활용해 전압·전류와 센서 신호를 확인하는 과정은 이후 임베디드 분야를 넘어 다양한 문제 상황에서도 원인을 빠르게 파악하는 데 큰 도움이 되었습니다.</p>
 
-                    <a href="./documents/lighting_automation_module.md" target="_blank" class="project-pdf-link">프로젝트 참고 자료 보기</a>
+                    <a href="./documents/Utility_Tunnel_Lighting_Electricity_Control.pdf" target="_blank" class="project-pdf-link">프로젝트 참고 자료(PDF) 보기</a>
+                    <a href="./documents/lighting_automation_module.md" target="_blank" class="project-pdf-link">프로젝트 참고 자료(MD) 보기</a>
                 `
             }
         ];
