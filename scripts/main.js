@@ -405,7 +405,7 @@ function loadProjects() {
         function displayProject(index) {
             const project = projects[index];
             projectsContainer.innerHTML = `
-                <div class="project">
+                <div class="project visible">
                     <h3>${project.title}</h3>
                     <img src="${project.image}" alt="${project.title}" class="project-image">
                     <p>${project.description}</p>
