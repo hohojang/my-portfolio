@@ -47,7 +47,6 @@ function showPage(index) {
         if (i === index) {
             page.style.transform = 'rotateY(0deg)';
             page.classList.add('active');
-            page.scrollTop = 0;
             loadPageContent(page.id);
         } else {
             page.style.transform = 'rotateY(180deg)';
@@ -56,7 +55,6 @@ function showPage(index) {
     });
     currentPage = index;
     updateNavigationButtons();
-    updatePageIndicator();
 }
 
 function loadPageContent(pageId) {
@@ -481,13 +479,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateNavigationButtons() {
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage === pages.length - 1;
-}
-
-function updatePageIndicator() {
-    const indicator = document.getElementById('page-indicator');
-    if (indicator) {
-        indicator.textContent = `${currentPage + 1} / ${pages.length}`;
-    }
 }
 
 // 비디오 모달 열기 함수
